@@ -213,9 +213,7 @@
                                         <!--<span>Fechar</span>-->
                                     </button>
                                 </div>
-
                             </div>
-
                             <div class="col-12" style="position: absolute;">
                                 <div onmouseover="uploadBtn('block');" onmouseout="uploadBtn('none')">
                                     <div style="position: absolute; right: 100px; z-index: 999999999;">
@@ -299,10 +297,10 @@
                                 </div>
                             </div>
                             <div class="col-6" style="float: right;">
-                                <div class="div-input form-floating mb-3 m-l-10 col-7" style="display: inline-block;">
+                                <div class="div-input form-floating mb-3 m-l-10 col-10" style="display: inline-block;">
                                     <input class="form-control" type="number" autocomplete="off"
                                         name="qntMaximaVeiculos" id="qnt_max_veiculos" placeholder=".">
-                                    <label for="" id="" style="width: 500px;">Qte Máxima de Veículos</label>
+                                    <label for="" id="" style="width: 600px;">Qte Máxima de Veículos</label>
                                 </div>
                                 <div class="div-input mb-3 m-l-10 col-9" style="display: inline-block;">
                                     <select class="form-select" aria-label="Default select example" id="empresa_resp">
@@ -312,8 +310,8 @@
                             </div>
                             <div class="col-12">
                                 <div class="div-input form-floating mb-3 m-l-10 col-10" style="display: inline-block;">
-                                    <input class="form-control" type="text" autocomplete="off"
-                                        name="usuario_add" id="usu_add" placeholder="." readonly>
+                                    <input class="form-control" type="text" autocomplete="off" name="usuario_add"
+                                        id="usu_add" placeholder="." readonly>
                                     <label for="" id="" style="width: 400px;">Usuário</label>
                                 </div>
                                 <div class="div-input mb-3 m-l-10 col-3" style="display: inline-block;"
@@ -323,12 +321,26 @@
                                     <label for="" id="" style="display: inline-block; margin-left: -20px;">Oficina
                                         Credenciada</label>
                                 </div>
-                                <div class="div-input mb-3 m-l-10 col-5" style="display: inline-block;"
+                                <div class="div-input mb-3 m-l-10 col-3" style="display: inline-block;"
                                     onclick="toggleCheck('oficina_desabilitada')">
                                     <input type="checkbox" name="" id="oficina_desabilitada"
                                         style="display: inline-block;">
                                     <label for="" id="" style="display: inline-block; margin-left: -20px;">Oficina
                                         Desabilitada</label>
+                                </div>
+                                <div class="col-1" style="display: inline-block;">
+                                    <button class="btn btn-success" style="padding: 2px 6px;">
+                                        <i class="material-symbols-outlined" style="font-size: 18px; margin: 0;">
+                                            add
+                                        </i>
+                                    </button>
+                                </div>
+                                <div class="col-1" style="display: inline-block; margin-left: -10px;">
+                                    <button class="btn btn-primary" style="padding: 2px 6px;">
+                                        <i class="material-symbols-outlined" style="font-size: 18px; margin: 0;">
+                                            help
+                                        </i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -448,8 +460,6 @@
                 </div>
             </div>
         </div>
-
-
         <script>
             var tipo;
 
