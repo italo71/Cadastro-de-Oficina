@@ -225,8 +225,8 @@
                                         <img src="https://siga.arcoconsultoria.com/SIGA/libsiga/images/icons/testesiga.png"
                                             alt="Logomarca">
                                     </div>
-                                </div><span class="material-symbols-outlined">
-
+                                </div>
+                                <span class="material-symbols-outlined">
                                 </span>
                             </div>
                         </div>
@@ -246,7 +246,7 @@
                                     <i class="material-icons" style="font-size: 14pt;">how_to_reg</i>
                                 </div>
                             </li>
-                            <li role="presentation" class="tab-select act" id="pagina_cad">
+                            <li role="presentation" class="tab-select" id="pagina_cad">
                                 <a href="#pagina_dados_bancarios" data-toggle="tab" onclick="alterTab(1)">
                                     Dados Bancarios
                                 </a>
@@ -254,8 +254,8 @@
                                     <i class="material-icons" style="font-size: 14pt;">payments</i>
                                 </div>
                             </li>
-                            <li role="presentation" class="tab-select act" id="pagina_cad">
-                                <a href="#pagina_anexos" data-toggle="tab" onclick="alterTab(1)">
+                            <li role="presentation" class="tab-select" id="pagina_cad">
+                                <a href="#pagina_anexos" data-toggle="tab" onclick="alterTab(2)">
                                     Anexos
                                 </a>
                                 <div style="display: inline-block; position: relative; top: 4px;">
@@ -264,13 +264,23 @@
                                     </i>
                                 </div>
                             </li>
-                            <li role="presentation" class="tab-select act" id="pagina_cad">
-                                <a href="#pagina_indicadores" data-toggle="tab" onclick="alterTab(1)">
+                            <li role="presentation" class="tab-select" id="pagina_cad">
+                                <a href="#pagina_indicadores" data-toggle="tab" onclick="alterTab(3)">
                                     Indicadores
                                 </a>
                                 <div style="display: inline-block; position: relative; top: 4px;">
                                     <i class="material-symbols-outlined" style="font-size: 14pt;">
                                         ssid_chart
+                                    </i>
+                                </div>
+                            </li>
+                            <li role="presentation" class="tab-select" id="pagina_cad">
+                                <a href="#pagina_porte" data-toggle="tab" onclick="alterTab(4)">
+                                    Porte
+                                </a>
+                                <div style="display: inline-block; position: relative; top: 4px;">
+                                    <i class="material-symbols-outlined" style="font-size: 14pt;">
+                                        straighten
                                     </i>
                                 </div>
                             </li>
@@ -485,8 +495,41 @@
                     <!-- Fim dados bancarios -->
                     <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
                     <!-- Inicio Anexos-->
-                    <div class="tab-pane row" id="pagina_anexos">
+                    <div class="tab-pane row" id="pagina_anexos" style="padding-bottom: 10px;">
                         <!-- tabelas anexos -->
+                        <div class="col-3" style="border-right: solid 1px lightgray;">
+                            <div class="table col-12" style="display: inline-block;">
+                                <table class="table" id="table_sinistro" style="width:95%">
+                                    <thead>
+                                        <tr>
+                                            <th class="th_table align-center">Tipo do Anexo</th>
+                                            <th class="th_table align-center">Qte</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="scrollable" id="body_table_porte">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-9">
+                            <div class="table col-12" style="display: inline-block; float: right;">
+                                <table class="table" id="table_sinistro" style="width:95%">
+                                    <thead>
+                                        <tr>
+                                            <th class="th_table align-center">Abrir</th>
+                                            <th class="th_table align-center">Tipo de Anexo</th>
+                                            <th class="th_table align-center">Arquivo</th>
+                                            <th class="th_table align-center">Usuário Inclusão</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="scrollable" id="body_table_porte">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- <div class="col-12" style="height: 30px;"> -->
+                            <button class="btn btn-success" style="width: 190px; right: 5px; bottom: 5px; position: absolute;">Inserir vários Anexos</button>
+                        <!-- </div> -->
                     </div>
                     <!-- Fim Anexos -->
                     <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
@@ -526,6 +569,29 @@
                         </div>
                     </div>
                     <!-- Fim indicadores -->
+                    <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
+                    <!-- Inicio Porte-->
+                    <div class="tab-pane row" id="pagina_porte">
+                        <div class="col-12 justify-content-center">
+                            <div class="table col-12" style="display: block;">
+                                <table class="table" id="table_sinistro" style="width:95%">
+                                    <thead>
+                                        <tr>
+                                            <th class="th_table align-center">Tipo de Veiculo</th>
+                                            <th class="th_table align-center">Vidros</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="scrollable" id="body_table_porte">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <label for="" style="display: block; margin-left: 25px;">Seguimento</label>
+                        <div class="col-12 justify-content-center m-b-10">
+                            <textarea name="" id="" cols="180" rows="5"></textarea>
+                        </div>
+                    </div>
+                    <!-- Fim porte -->
                     <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
                 </div>
             </div>
@@ -582,7 +648,7 @@
             var tipo;
 
             window.onload = () => {
-                alterTab(3);
+                alterTab(2);
                 document.getElementById('upload-btn').style.display = 'none'
             }
 
@@ -598,6 +664,7 @@
                     if (document.querySelectorAll('.tab-select')[i].classList.contains('act')) {
                         document.querySelectorAll('.tab-select')[i].classList.remove('act')
                     }
+                    console.log(i)
                 }
                 document.querySelectorAll('.tab-pane')[tab].style.display = ''
                 document.querySelectorAll('.tab-select')[tab].classList.add('act')
