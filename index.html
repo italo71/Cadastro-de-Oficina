@@ -113,7 +113,7 @@
             font-size: 12.9px;
         }
     </style>
-    
+
     <script>
         function removerMascara(obj) {
             var ret;
@@ -189,21 +189,18 @@
                                     <button data-content="Pesquisar" data-placement="top" data-toggle="popover"
                                         class="btn btn-primary"
                                         style="display: inline-block; background-color:#40E0D0 !important; margin-top: 21px !important; margin-right: 4px !important;"
-                                        onclick="parent.ebfFlowExecute('Pesquisa Fornecedores', null);;">
                                         <i class="material-icons">search</i>
                                         <!--<span>Salvar</span>-->
                                     </button>
                                     <button data-content="Editar" data-placement="top" data-toggle="popover"
                                         class="btn btn-primary"
                                         style="display: inline-block; background-color:#5eadf3 !important; margin-top: 21px !important; margin-right: 4px !important;"
-                                        onclick="parent.ebfFlowExecute('Novo - Habilitar campos desabilitados', null);;">
                                         <i class="material-icons">edit</i>
                                         <!--<span>Salvar</span>-->
                                     </button>
                                     <button data-content="Salvar" data-placement="top" data-toggle="popover"
                                         class="btn btn-primary"
                                         style="display: inline-block; background-color:#337ab7 !important; margin-top: 21px !important; margin-right: 4px !important;"
-                                        onclick="parent.ebfFlowExecute('Novo Fornecedor - Salvar', null);;">
                                         <i class="material-icons">save</i>
                                         <!--<span>Fechar</span>-->
                                     </button>
@@ -296,7 +293,6 @@
                                 id="razao_social" placeholder=".">
                             <label for="" id="" style="width: 400px;">Razão Social</label>
                         </div>
-
                         <div class="div-input form-floating mb-3 m-l-10 col-4" style="display: inline-block;">
                             <input class="form-control" type="text" autocomplete="off" name="nomeFantasia"
                                 id="nome_fantasia" placeholder=".">
@@ -479,7 +475,7 @@
                         </div>
                         <div class="div-input form-floating mb-3 m-l-10 col-3" style="display: inline-block;">
                             <input class="form-control" type="text" autocomplete="off" name="responsalve"
-                                id="responsalve" placeholder=".">
+                                id="responsavel" placeholder=".">
                             <label for="" id="" style="width: 400px;">Responsálve</label>
                         </div>
                         <div class="div-input form-floating mb-3 m-l-10 col-3" style="display: inline-block;">
@@ -513,7 +509,7 @@
                             </div>
                         </div>
                         <div class="col-9">
-                            <div class="table col-12" style="display: inline-block; float: right;">
+                            <div class="table col-12" style="display: inline-block;">
                                 <table class="table" id="table_sinistro" style="width:95%">
                                     <thead>
                                         <tr>
@@ -529,7 +525,9 @@
                             </div>
                         </div>
                         <!-- <div class="col-12" style="height: 30px;"> -->
-                            <button class="btn btn-success" style="width: 190px; right: 5px; bottom: 5px; position: absolute;">Inserir vários Anexos</button>
+                        <button class="btn btn-success"
+                            style="width: 190px; right: 5px; bottom: 5px; position: absolute;">Inserir vários
+                            Anexos</button>
                         <!-- </div> -->
                     </div>
                     <!-- Fim Anexos -->
@@ -700,6 +698,41 @@
 
             function selectRadio(id) {
                 document.getElementById(id).checked = 1;
+            }
+
+            function obterDados() {
+                document.getElementById('razao_social').value;
+                document.getElementById('nome_fantasia').value;
+                document.getElementById('telefone_1').value;
+                document.getElementById('telefone_2').value;
+                document.getElementById('email').value;
+                document.getElementById('email2').value;
+                document.getElementById('data_cadastro').value;
+                document.getElementById('usu_resp').value;
+                document.getElementById('qnt_max_veiculos').value;
+                document.getElementById('empresa_resp').value;
+                document.getElementById('usu_add').value;
+                document.getElementById('oficina_credenciada').value;
+                document.getElementById('oficina_desabilitada').value;
+                document.getElementById('cep').value;
+                document.getElementById('uf').value;
+                document.getElementById('cidade').value;
+                document.getElementById('bairro').value;
+                document.getElementById('endereco').value;
+                document.getElementById('num').value;
+                let tipo_conta = obterTipoConta();
+                document.getElementById('banco').value;
+                document.getElementById('agencia').value;
+                document.getElementById('conta').value;
+                document.getElementById('responsavel').value;
+                document.getElementById('favorecido').value;
+                document.getElementById('cpf_cnpj_banco').value;s
+            }
+
+            function obterTipoConta() {
+                if (document.getElementById('cCorrente').checked == 1)
+                    return 1
+                else return 2
             }
         </script>
 
