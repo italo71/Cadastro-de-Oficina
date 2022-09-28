@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/datatables.min.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+        
     <style>
         .select2-selection__rendered {
             user-select: text;
@@ -189,7 +190,9 @@
                                     <button data-content="Pesquisar" data-placement="top" data-toggle="popover"
                                         class="btn btn-primary"
                                         style="display: inline-block; background-color:#40E0D0 !important; margin-top: 21px !important; margin-right: 4px !important;"
-                                        <i class="material-icons">search</i>
+                                        <span class="material-symbols-outlined">
+                                            search
+                                            </span>
                                         <!--<span>Salvar</span>-->
                                     </button>
                                     <button data-content="Editar" data-placement="top" data-toggle="popover"
@@ -659,7 +662,6 @@
             }
 
             function uploadBtn(tipo) {
-                console.log(tipo)
                 document.getElementById('upload-btn').style.display = tipo
             }
 
@@ -670,7 +672,6 @@
                     if (document.querySelectorAll('.tab-select')[i].classList.contains('act')) {
                         document.querySelectorAll('.tab-select')[i].classList.remove('act')
                     }
-                    console.log(i)
                 }
                 document.querySelectorAll('.tab-pane')[tab].style.display = ''
                 document.querySelectorAll('.tab-select')[tab].classList.add('act')
