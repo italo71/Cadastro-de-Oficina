@@ -372,11 +372,14 @@
                                     </button>
                                 </div>
                                 <div class="col-1" style="display: inline-block; margin-left: -10px;">
-                                    <button class="btn btn-primary" style="padding: 2px 6px;">
-                                        <i class="material-symbols-outlined" style="font-size: 18px; margin: 0;">
-                                            help
-                                        </i>
-                                    </button>
+                                    <a href="https://videos.arcoconsultoria.com/videos/cadastro_oficinas.mp4"
+                                        target="_blank">
+                                        <button class="btn btn-primary" style="padding: 2px 6px;">
+                                            <i class="material-symbols-outlined" style="font-size: 18px; margin: 0;">
+                                                help
+                                            </i>
+                                        </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -441,8 +444,12 @@
                             </div>
                         </div>
                         <div class="div-input col-12">
-                            <label for="">Observações Gerais</label>
-                            <textarea name="" id="" cols="180" rows="5" style="font-size: 11pt;"></textarea>
+                            <div class="col-3 justify-content-center">
+                                <label for="" style="display: block;">Observações Gerais</label>
+                            </div>
+                            <div class="col-12 justify-content-center">
+                                <textarea name="" id="" cols="180" rows="5" style="font-size: 11pt;"></textarea>
+                            </div>
                         </div>
                     </div>
                     <!-- Fim dados -->
@@ -647,7 +654,7 @@
             var tipo;
 
             window.onload = () => {
-                alterTab(2);
+                alterTab(0);
                 document.getElementById('upload-btn').style.display = 'none'
             }
 
@@ -700,7 +707,18 @@
                 document.getElementById(id).checked = 1;
             }
 
-            function obterDados() {
+            function dadosObrigatorios() {
+                if (
+                    nome != null &&
+                    cpf_cnpj != null &&
+                    validacaoEmail &&
+                    data_nasc != null
+                ) {
+
+                }
+            }
+
+            function preencherInfor(lista) {
                 document.getElementById('razao_social').value;
                 document.getElementById('nome_fantasia').value;
                 document.getElementById('telefone_1').value;
@@ -711,22 +729,48 @@
                 document.getElementById('usu_resp').value;
                 document.getElementById('qnt_max_veiculos').value;
                 document.getElementById('empresa_resp').value;
-                document.getElementById('usu_add').value;
-                document.getElementById('oficina_credenciada').value;
-                document.getElementById('oficina_desabilitada').value;
                 document.getElementById('cep').value;
                 document.getElementById('uf').value;
                 document.getElementById('cidade').value;
                 document.getElementById('bairro').value;
                 document.getElementById('endereco').value;
                 document.getElementById('num').value;
-                let tipo_conta = obterTipoConta();
+                document.getElementById('oficina_credenciada').checked;
+                document.getElementById('oficina_desabilitada').checked;
                 document.getElementById('banco').value;
                 document.getElementById('agencia').value;
                 document.getElementById('conta').value;
                 document.getElementById('responsavel').value;
                 document.getElementById('favorecido').value;
-                document.getElementById('cpf_cnpj_banco').value;s
+                document.getElementById('cpf_cnpj_banco').value;
+            }
+
+            function obterDados() {
+                let razao_social = document.getElementById('razao_social').value;
+                let nome_fantasia = document.getElementById('nome_fantasia').value;
+                let tel1 = document.getElementById('telefone_1').value;
+                let tel2 = document.getElementById('telefone_2').value;
+                let email = document.getElementById('email').value;
+                let email2 = document.getElementById('email2').value;
+                let data_cadastro = document.getElementById('data_cadastro').value;
+                let usu_resp = document.getElementById('usu_resp').value;
+                let max_veiculo = document.getElementById('qnt_max_veiculos').value;
+                let empresa_resp = document.getElementById('empresa_resp').value;
+                let cep = document.getElementById('cep').value;
+                let uf = document.getElementById('uf').value;
+                let cidade = document.getElementById('cidade').value;
+                let bairro = document.getElementById('bairro').value;
+                let endereco = document.getElementById('endereco').value;
+                let num = document.getElementById('num').value;
+                let credenciada = document.getElementById('oficina_credenciada').checked
+                let desabilitada = document.getElementById('oficina_desabilitada').checked
+                let tipo_conta = obterTipoConta();
+                let banco = document.getElementById('banco').value;
+                let agencia = document.getElementById('agencia').value;
+                let conta = document.getElementById('conta').value;
+                let responsavel = document.getElementById('responsavel').value;
+                let favorecido = document.getElementById('favorecido').value;
+                let cpf_cnpj_banco = document.getElementById('cpf_cnpj_banco').value;
             }
 
             function obterTipoConta() {
