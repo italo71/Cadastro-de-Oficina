@@ -19,12 +19,12 @@
     <link rel="stylesheet" href="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/datatables.min.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-        
+
     <style>
         .select2-selection__rendered {
             user-select: text;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
@@ -187,21 +187,21 @@
                                 <div class="col-6 m-l-10">
                                     <button data-content="Pesquisar" data-placement="top" data-toggle="popover"
                                         class="btn btn-primary"
-                                        style="display: inline-block; background-color:#40E0D0 !important; margin-top: 21px !important; margin-right: 4px !important;"
+                                        style="display: inline-block; background-color:#40E0D0 !important; margin-top: 21px !important; margin-right: 4px !important;">
                                         <span class="material-symbols-outlined">
                                             search
-                                            </span>
+                                        </span>
                                         <!--<span>Salvar</span>-->
                                     </button>
                                     <button data-content="Editar" data-placement="top" data-toggle="popover"
                                         class="btn btn-primary"
-                                        style="display: inline-block; background-color:#5eadf3 !important; margin-top: 21px !important; margin-right: 4px !important;"
+                                        style="display: inline-block; background-color:#5eadf3 !important; margin-top: 21px !important; margin-right: 4px !important;">
                                         <i class="material-icons">edit</i>
                                         <!--<span>Salvar</span>-->
                                     </button>
                                     <button data-content="Salvar" data-placement="top" data-toggle="popover"
                                         class="btn btn-primary"
-                                        style="display: inline-block; background-color:#337ab7 !important; margin-top: 21px !important; margin-right: 4px !important;"
+                                        style="display: inline-block; background-color:#337ab7 !important; margin-top: 21px !important; margin-right: 4px !important;">
                                         <i class="material-icons">save</i>
                                         <!--<span>Fechar</span>-->
                                     </button>
@@ -337,7 +337,8 @@
                                 <div class="div-input form-floating mb-3 m-l-10 col-10" style="display: inline-block;">
                                     <input class="form-control" type="number" autocomplete="off"
                                         name="qntMaximaVeiculos" id="qnt_max_veiculos" placeholder=".">
-                                    <label for="" id="" style="width: 600px;">Qte Máxima de Veículos <span class="obg">*</span></label>
+                                    <label for="" id="" style="width: 600px;">Qte Máxima de Veículos <span
+                                            class="obg">*</span></label>
                                 </div>
                                 <div class="div-input mb-3 m-l-10 col-9" style="display: inline-block;">
                                     <select class="form-select" aria-label="Default select example" id="empresa_resp">
@@ -649,172 +650,173 @@
                 </div>
             </div>
         </div>
-        <script>
-            var tipo;
+    </div>
+    <script>
+        var tipo;
 
-            window.onload = () => {
-                alterTab(0);
-                document.getElementById('upload-btn').style.display = 'none'
-            }
+        window.onload = () => {
+            alterTab(0);
+            document.getElementById('upload-btn').style.display = 'none'
+        }
 
-            function uploadBtn(tipo) {
-                document.getElementById('upload-btn').style.display = tipo
-            }
+        function uploadBtn(tipo) {
+            document.getElementById('upload-btn').style.display = tipo
+        }
 
-            function alterTab(tab) {
-                let qnt = document.querySelectorAll('.tab-pane').length
-                for (let i = 0; i < qnt; i++) {
-                    document.querySelectorAll('.tab-pane')[i].style.display = 'none'
-                    if (document.querySelectorAll('.tab-select')[i].classList.contains('act')) {
-                        document.querySelectorAll('.tab-select')[i].classList.remove('act')
-                    }
-                }
-                document.querySelectorAll('.tab-pane')[tab].style.display = ''
-                document.querySelectorAll('.tab-select')[tab].classList.add('act')
-            }
-
-            function pesquisacep() {
-                let valor = document.getElementById('cep').value
-                valor = valor.replace(/ /g, '')
-                valor = valor.replace(/-/g, '')
-                valor = valor.replace(/\./g, '')
-                valor = valor.replace(/\//g, '')
-                if (valor.length == 8)
-                    fetch(`https://viacep.com.br/ws/${valor}/json`)
-                        .then(response => {
-                            return response.json()
-                                .then((data) => {
-                                    document.getElementById('cidade').value = data.localidade
-                                    document.getElementById('bairro').value = data.bairro
-                                    document.getElementById('endereco').value = data.logradouro
-                                    document.getElementById('uf').value = data.uf
-                                });
-                        }).then((data) => {
-                        }).catch((err) => { });
-            };
-
-            function toggleCheck(id) {
-                if (document.getElementById(id).checked)
-                    document.getElementById(id).checked = 0
-                else
-                    document.getElementById(id).checked = 1
-            }
-
-            function selectRadio(id) {
-                document.getElementById(id).checked = 1;
-            }
-
-            function dadosObrigatorios() {
-                if (
-                    nome != null &&
-                    cpf_cnpj != null &&
-                    validacaoEmail &&
-                    data_nasc != null
-                ) {
-
+        function alterTab(tab) {
+            let qnt = document.querySelectorAll('.tab-pane').length
+            for (let i = 0; i < qnt; i++) {
+                document.querySelectorAll('.tab-pane')[i].style.display = 'none'
+                if (document.querySelectorAll('.tab-select')[i].classList.contains('act')) {
+                    document.querySelectorAll('.tab-select')[i].classList.remove('act')
                 }
             }
+            document.querySelectorAll('.tab-pane')[tab].style.display = ''
+            document.querySelectorAll('.tab-select')[tab].classList.add('act')
+        }
 
-            function preencherInfor(lista) {
-                document.getElementById('razao_social').value;
-                document.getElementById('nome_fantasia').value;
-                document.getElementById('telefone_1').value;
-                document.getElementById('telefone_2').value;
-                document.getElementById('email').value;
-                document.getElementById('email2').value;
-                document.getElementById('data_cadastro').value;
-                document.getElementById('usu_resp').value;
-                document.getElementById('qnt_max_veiculos').value;
-                document.getElementById('empresa_resp').value;
-                document.getElementById('cep').value;
-                document.getElementById('uf').value;
-                document.getElementById('cidade').value;
-                document.getElementById('bairro').value;
-                document.getElementById('endereco').value;
-                document.getElementById('num').value;
-                document.getElementById('oficina_credenciada').checked;
-                document.getElementById('oficina_desabilitada').checked;
-                document.getElementById('banco').value;
-                document.getElementById('agencia').value;
-                document.getElementById('conta').value;
-                document.getElementById('responsavel').value;
-                document.getElementById('favorecido').value;
-                document.getElementById('cpf_cnpj_banco').value;
+        function pesquisacep() {
+            let valor = document.getElementById('cep').value
+            valor = valor.replace(/ /g, '')
+            valor = valor.replace(/-/g, '')
+            valor = valor.replace(/\./g, '')
+            valor = valor.replace(/\//g, '')
+            if (valor.length == 8)
+                fetch(`https://viacep.com.br/ws/${valor}/json`)
+                    .then(response => {
+                        return response.json()
+                            .then((data) => {
+                                document.getElementById('cidade').value = data.localidade
+                                document.getElementById('bairro').value = data.bairro
+                                document.getElementById('endereco').value = data.logradouro
+                                document.getElementById('uf').value = data.uf
+                            });
+                    }).then((data) => {
+                    }).catch((err) => { });
+        };
+
+        function toggleCheck(id) {
+            if (document.getElementById(id).checked)
+                document.getElementById(id).checked = 0
+            else
+                document.getElementById(id).checked = 1
+        }
+
+        function selectRadio(id) {
+            document.getElementById(id).checked = 1;
+        }
+
+        function dadosObrigatorios() {
+            if (
+                nome != null &&
+                cpf_cnpj != null &&
+                validacaoEmail &&
+                data_nasc != null
+            ) {
+
             }
+        }
 
-            function obterDados() {
-                let razao_social = document.getElementById('razao_social').value;
-                let nome_fantasia = document.getElementById('nome_fantasia').value;
-                let tel1 = document.getElementById('telefone_1').value;
-                let tel2 = document.getElementById('telefone_2').value;
-                let email = document.getElementById('email').value;
-                let email2 = document.getElementById('email2').value;
-                let data_cadastro = document.getElementById('data_cadastro').value;
-                let usu_resp = document.getElementById('usu_resp').value;
-                let max_veiculo = document.getElementById('qnt_max_veiculos').value;
-                let empresa_resp = document.getElementById('empresa_resp').value;
-                let cep = document.getElementById('cep').value;
-                let uf = document.getElementById('uf').value;
-                let cidade = document.getElementById('cidade').value;
-                let bairro = document.getElementById('bairro').value;
-                let endereco = document.getElementById('endereco').value;
-                let num = document.getElementById('num').value;
-                let credenciada = document.getElementById('oficina_credenciada').checked
-                let desabilitada = document.getElementById('oficina_desabilitada').checked
-                let tipo_conta = obterTipoConta();
-                let banco = document.getElementById('banco').value;
-                let agencia = document.getElementById('agencia').value;
-                let conta = document.getElementById('conta').value;
-                let responsavel = document.getElementById('responsavel').value;
-                let favorecido = document.getElementById('favorecido').value;
-                let cpf_cnpj_banco = document.getElementById('cpf_cnpj_banco').value;
-            }
+        function preencherInfor(lista) {
+            document.getElementById('razao_social').value;
+            document.getElementById('nome_fantasia').value;
+            document.getElementById('telefone_1').value;
+            document.getElementById('telefone_2').value;
+            document.getElementById('email').value;
+            document.getElementById('email2').value;
+            document.getElementById('data_cadastro').value;
+            document.getElementById('usu_resp').value;
+            document.getElementById('qnt_max_veiculos').value;
+            document.getElementById('empresa_resp').value;
+            document.getElementById('cep').value;
+            document.getElementById('uf').value;
+            document.getElementById('cidade').value;
+            document.getElementById('bairro').value;
+            document.getElementById('endereco').value;
+            document.getElementById('num').value;
+            document.getElementById('oficina_credenciada').checked;
+            document.getElementById('oficina_desabilitada').checked;
+            document.getElementById('banco').value;
+            document.getElementById('agencia').value;
+            document.getElementById('conta').value;
+            document.getElementById('responsavel').value;
+            document.getElementById('favorecido').value;
+            document.getElementById('cpf_cnpj_banco').value;
+        }
 
-            function obterTipoConta() {
-                if (document.getElementById('cCorrente').checked == 1)
-                    return 1
-                else return 2
-            }
-        </script>
+        function obterDados() {
+            let razao_social = document.getElementById('razao_social').value;
+            let nome_fantasia = document.getElementById('nome_fantasia').value;
+            let tel1 = document.getElementById('telefone_1').value;
+            let tel2 = document.getElementById('telefone_2').value;
+            let email = document.getElementById('email').value;
+            let email2 = document.getElementById('email2').value;
+            let data_cadastro = document.getElementById('data_cadastro').value;
+            let usu_resp = document.getElementById('usu_resp').value;
+            let max_veiculo = document.getElementById('qnt_max_veiculos').value;
+            let empresa_resp = document.getElementById('empresa_resp').value;
+            let cep = document.getElementById('cep').value;
+            let uf = document.getElementById('uf').value;
+            let cidade = document.getElementById('cidade').value;
+            let bairro = document.getElementById('bairro').value;
+            let endereco = document.getElementById('endereco').value;
+            let num = document.getElementById('num').value;
+            let credenciada = document.getElementById('oficina_credenciada').checked
+            let desabilitada = document.getElementById('oficina_desabilitada').checked
+            let tipo_conta = obterTipoConta();
+            let banco = document.getElementById('banco').value;
+            let agencia = document.getElementById('agencia').value;
+            let conta = document.getElementById('conta').value;
+            let responsavel = document.getElementById('responsavel').value;
+            let favorecido = document.getElementById('favorecido').value;
+            let cpf_cnpj_banco = document.getElementById('cpf_cnpj_banco').value;
+        }
 
-        <!-- Jquery Core Js -->
-        <script src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/jquery/jquery.min.js"></script>
-        <!-- Bootstrap Core Js -->
-        <script src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/bootstrap/js/bootstrap.js"></script>
-        <script src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/select2/dist/js/select2.min.js"></script>
-        <script src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/node-waves/waves.js"></script>
+        function obterTipoConta() {
+            if (document.getElementById('cCorrente').checked == 1)
+                return 1
+            else return 2
+        }
+    </script>
 
-        <!-- Input Mask Plugin Js -->
-        <script
-            src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/jquery-inputmask/jquery.inputmask.bundle.js"></script>
+    <!-- Jquery Core Js -->
+    <script src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap Core Js -->
+    <script src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/bootstrap/js/bootstrap.js"></script>
+    <script src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/select2/dist/js/select2.min.js"></script>
+    <script src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/node-waves/waves.js"></script>
 
-        <!-- Data Table Plugin Js -->
-        <script type="text/javascript"
-            src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/moment/moment.js"></script>
-        <script type="text/javascript"
-            src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/datatables.min.js"></script>
-        <script type="text/javascript"
-            src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/dt-moment.js"></script>
-        <script type="text/javascript"
-            src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/Buttons-1.6.1/js/dataTables.buttons.min.js"></script>
-        <script type="text/javascript"
-            src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/Buttons-1.6.1/js/buttons.flash.min.js"></script>
-        <script type="text/javascript"
-            src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/jszip.min.js"></script>
-        <script type="text/javascript"
-            src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/vfs_fonts.js"></script>
-        <script type="text/javascript"
-            src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/Buttons-1.6.1/js/buttons.html5.min.js"></script>
-        <script type="text/javascript"
-            src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/Buttons-1.6.1/js/buttons.print.min.js"></script>
-        <!--  -->
-        <script src="https://siga.arcoconsultoria.com/SIGA/libsiga/js/mainNoConflict.js"></script>
-        <script src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/jquery-ui/jquery-ui.min.js"></script>
-        <script src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/jquery-ui/datepicker-pt-BR.js"></script>
-        <script src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/ckeditor/ckeditor.js"></script>
-        <script src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/ckeditor/lang/pt-br.js"></script>
-        <!-- Jquery CountTo Plugin Js -->
-        <script src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/jquery-countto/jquery.countTo.js"></script>
+    <!-- Input Mask Plugin Js -->
+    <script
+        src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/jquery-inputmask/jquery.inputmask.bundle.js"></script>
+
+    <!-- Data Table Plugin Js -->
+    <script type="text/javascript"
+        src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/moment/moment.js"></script>
+    <script type="text/javascript"
+        src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/datatables.min.js"></script>
+    <script type="text/javascript"
+        src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/dt-moment.js"></script>
+    <script type="text/javascript"
+        src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/Buttons-1.6.1/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript"
+        src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/Buttons-1.6.1/js/buttons.flash.min.js"></script>
+    <script type="text/javascript"
+        src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/jszip.min.js"></script>
+    <script type="text/javascript"
+        src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/vfs_fonts.js"></script>
+    <script type="text/javascript"
+        src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/Buttons-1.6.1/js/buttons.html5.min.js"></script>
+    <script type="text/javascript"
+        src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/Buttons-1.6.1/js/buttons.print.min.js"></script>
+    <!--  -->
+    <script src="https://siga.arcoconsultoria.com/SIGA/libsiga/js/mainNoConflict.js"></script>
+    <script src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/jquery-ui/datepicker-pt-BR.js"></script>
+    <script src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/ckeditor/ckeditor.js"></script>
+    <script src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/ckeditor/lang/pt-br.js"></script>
+    <!-- Jquery CountTo Plugin Js -->
+    <script src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/jquery-countto/jquery.countTo.js"></script>
 </body>
 
 </html>
