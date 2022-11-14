@@ -111,6 +111,11 @@
         #importacao_eventos {
             font-size: 12.9px;
         }
+
+        .modal-content input {
+            border: solid 2px lightgray;
+            border-radius: 5px;
+        }
     </style>
 
     <script>
@@ -167,71 +172,6 @@
     <div class="container-fluid">
         <div class="row">
             <div id="page1" style="padding: 8px 0px 0px 25px;">
-                <div class="card">
-                    <div class="header">
-                        <h3>Cadastro de Oficinas</h3>
-                        <div class="row" style="padding: 8px;">
-                            <div class="justify-content-center">
-                                <div class="col-4">
-                                    <label for="usuario">CPF/CNPJ</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input id="cpf_cnpj" class="form-control cnpj-format "
-                                                onkeyup="maskaraCPFCNPJ(this);" style="width:50%; ">
-                                        </div>
-                                        <div>
-                                            <label type="text" id="alerta" style="padding-top: 10px;"></label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-6 m-l-10">
-                                    <button data-content="Pesquisar" data-placement="top" data-toggle="popover"
-                                        class="btn btn-primary"
-                                        style="display: inline-block; background-color:#40E0D0 !important; margin-top: 21px !important; margin-right: 4px !important;">
-                                        <span class="material-symbols-outlined">
-                                            search
-                                        </span>
-                                        <!--<span>Salvar</span>-->
-                                    </button>
-                                    <button data-content="Editar" data-placement="top" data-toggle="popover"
-                                        class="btn btn-primary"
-                                        style="display: inline-block; background-color:#5eadf3 !important; margin-top: 21px !important; margin-right: 4px !important;">
-                                        <i class="material-icons">edit</i>
-                                        <!--<span>Salvar</span>-->
-                                    </button>
-                                    <button data-content="Salvar" data-placement="top" data-toggle="popover"
-                                        class="btn btn-primary"
-                                        style="display: inline-block; background-color:#337ab7 !important; margin-top: 21px !important; margin-right: 4px !important;">
-                                        <i class="material-icons">save</i>
-                                        <!--<span>Fechar</span>-->
-                                    </button>
-                                    <button data-content="Fechar" data-placement="top" data-toggle="popover"
-                                        onclick="ebfCloseForm()" class="btn btn-primary"
-                                        style="display: inline-block;  background-color: #f44336 !important; margin-top: 21px !important; margin-right: 4px !important;">
-                                        <i class="material-icons">close</i>
-                                        <!--<span>Fechar</span>-->
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="col-12" style="position: absolute;">
-                                <div onmouseover="uploadBtn('block');" onmouseout="uploadBtn('none')">
-                                    <div style="position: absolute; right: 100px; z-index: 999999999;">
-                                        <button class="btn btn-success"
-                                            style="position: relative; top: 20px; right: 70px;" id="upload-btn"><i
-                                                class="material-icons">file_upload</i></button>
-                                    </div>
-                                    <div style="position: absolute; right: 100px;">
-                                        <img src="https://siga.arcoconsultoria.com/SIGA/libsiga/images/icons/testesiga.png"
-                                            alt="Logomarca">
-                                    </div>
-                                </div>
-                                <span class="material-symbols-outlined">
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Fim cabeçalho -->
                 <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
                 <!-- Inicio parte de preenchimento de informações -->
                 <div class="card">
@@ -320,138 +260,74 @@
                             <label for="" id="" style="width: 400px;">Email 2</label>
                         </div>
                         <!-- info adicionais -->
-                        <div class="col-6" style="border-left: solid 1px lightgray;">
-                            <div class="col-6" style="float: left;">
-                                <div class="div-input form-floating mb-3 m-l-10 col-9" style="display: inline-block;">
-                                    <input class="form-control" type="date" autocomplete="off" name="dataDeCadastro"
-                                        id="data_cadastro" placeholder="." readonly>
-                                    <label for="" id="" style="width: 400px;">Data de Cadastro</label>
-                                </div>
-                                <div class="div-input mb-3 m-l-10 col-9" style="display: inline-block;">
-                                    <select class="form-select" aria-label="Default select example" id="usu_resp">
-                                        <option value="" selected>Usuário Responsável</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-6" style="float: right;">
-                                <div class="div-input form-floating mb-3 m-l-10 col-10" style="display: inline-block;">
-                                    <input class="form-control" type="number" autocomplete="off"
-                                        name="qntMaximaVeiculos" id="qnt_max_veiculos" placeholder=".">
-                                    <label for="" id="" style="width: 600px;">Qte Máxima de Veículos <span
-                                            class="obg">*</span></label>
-                                </div>
-                                <div class="div-input mb-3 m-l-10 col-9" style="display: inline-block;">
-                                    <select class="form-select" aria-label="Default select example" id="empresa_resp">
-                                        <option value="" selected>Empresa</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="div-input form-floating mb-3 m-l-10 col-10" style="display: inline-block;">
-                                    <input class="form-control" type="text" autocomplete="off" name="usuario_add"
-                                        id="usu_add" placeholder="." readonly>
-                                    <label for="" id="" style="width: 400px;">Usuário</label>
-                                </div>
-                                <div class="div-input mb-3 m-l-10 col-3" style="display: inline-block;"
-                                    onclick="toggleCheck('oficina_credenciada')">
-                                    <input type="checkbox" name="" id="oficina_credenciada"
-                                        style="display: inline-block;">
-                                    <label for="" id="" style="display: inline-block; margin-left: -20px;">Oficina
-                                        Credenciada</label>
-                                </div>
-                                <div class="div-input mb-3 m-l-10 col-3" style="display: inline-block;"
-                                    onclick="toggleCheck('oficina_desabilitada')">
-                                    <input type="checkbox" name="" id="oficina_desabilitada"
-                                        style="display: inline-block;">
-                                    <label for="" id="" style="display: inline-block; margin-left: -20px;">Oficina
-                                        Desabilitada</label>
-                                </div>
-                                <div class="col-1" style="display: inline-block;">
-                                    <button class="btn btn-success" style="padding: 2px 6px;">
-                                        <i class="material-symbols-outlined" style="font-size: 18px; margin: 0;">
-                                            add
-                                        </i>
-                                    </button>
-                                </div>
-                                <div class="col-1" style="display: inline-block; margin-left: -10px;">
-                                    <a href="https://videos.arcoconsultoria.com/videos/cadastro_oficinas.mp4"
-                                        target="_blank">
-                                        <button class="btn btn-primary" style="padding: 2px 6px;">
-                                            <i class="material-symbols-outlined" style="font-size: 18px; margin: 0;">
-                                                help
-                                            </i>
-                                        </button>
-                                    </a>
-                                </div>
-                            </div>
+                        <div class="div-input form-floating mb-3 m-l-10 col-2" style="display: inline-block;">
+                            <input class="form-control" type="date" autocomplete="off" name="dataDeCadastro"
+                                id="data_cadastro" placeholder="." readonly>
+                            <label for="" id="" style="width: 400px;">Data de Cadastro</label>
+                        </div>
+                        <div class="div-input form-floating mb-3 m-l-10 col-2" style="display: inline-block;">
+                            <input class="form-control" type="number" autocomplete="off" name="qntMaximaVeiculos"
+                                id="qnt_max_veiculos" placeholder=".">
+                            <label for="" id="" style="width: 600px;">Qte Máxima de Veículos <span
+                                    class="obg">*</span></label>
                         </div>
                         <!-- Localização -->
-                        <div class="col-6" style="margin-top: -235px;">
-                            <div class="div-input form-floating mb-3 m-l-10 col-4" style="display: inline-block;">
-                                <input class="form-control" type="text" autocomplete="off" name="cep" id="cep"
-                                    placeholder="." onchange="pesquisacep(this.val)">
-                                <label for="" id="" style="width: 400px;">CEP <span class="obg">*</span></label>
-                            </div>
-                            <div class="div-input mb-3 col-4" style="display: inline-block; margin-top: 35px;">
-                                <select class="form-select" aria-label="Default select example" id="uf">
-                                    <option value="" selected>UF</option>
-                                    <option value="AC">Acre</option>
-                                    <option value="AL">Alagoas</option>
-                                    <option value="AP">Amapá</option>
-                                    <option value="AM">Amazonas</option>
-                                    <option value="BA">Bahia</option>
-                                    <option value="CE">Ceará</option>
-                                    <option value="DF">Distrito Federal</option>
-                                    <option value="ES">Espirito Santo</option>
-                                    <option value="GO">Goiás</option>
-                                    <option value="MA">Maranhão</option>
-                                    <option value="MS">Mato Grosso do Sul</option>
-                                    <option value="MT">Mato Grosso</option>
-                                    <option value="MG">Minas Gerais</option>
-                                    <option value="PA">Pará</option>
-                                    <option value="PB">Paraíba</option>
-                                    <option value="PR">Paraná</option>
-                                    <option value="PE">Pernambuco</option>
-                                    <option value="PI">Piauí</option>
-                                    <option value="RJ">Rio de Janeiro</option>
-                                    <option value="RN">Rio Grande do Norte</option>
-                                    <option value="RS">Rio Grande do Sul</option>
-                                    <option value="RO">Rondônia</option>
-                                    <option value="RR">Roraima</option>
-                                    <option value="SC">Santa Catarina</option>
-                                    <option value="SP">São Paulo</option>
-                                    <option value="SE">Sergipe</option>
-                                    <option value="TO">Tocantins</option>
-                                </select>
-                            </div>
-                            <div class="div-input form-floating mb-3 m-l-10 col-5" style="display: inline-block;">
-                                <input class="form-control" type="text" autocomplete="off" name="cidade" id="cidade"
-                                    placeholder=".">
-                                <label for="" id="" style="width: 400px;">Cidade <span class="obg">*</span></label>
-                            </div>
-                            <div class="div-input form-floating mb-3 m-l-10 col-4" style="display: inline-block;">
-                                <input class="form-control" type="text" autocomplete="off" name="bairro" id="bairro"
-                                    placeholder=".">
-                                <label for="" id="" style="width: 400px;">Bairro <span class="obg">*</span></label>
-                            </div>
-                            <div class="div-input form-floating mb-3 m-l-10 col-7" style="display: inline-block;">
-                                <input class="form-control" type="text" autocomplete="off" name="Endereço" id="endereco"
-                                    placeholder=".">
-                                <label for="" id="" style="width: 400px;">Endereço <span class="obg">*</span></label>
-                            </div>
-                            <div class="div-input form-floating mb-3 m-l-10 col-2" style="display: inline-block;">
-                                <input class="form-control" type="text" autocomplete="off" name="num" id="num"
-                                    placeholder=".">
-                                <label for="" id="" style="width: 400px;">Numero <span class="obg">*</span></label>
-                            </div>
+                        <div class="div-input form-floating mb-3 m-l-10 col-1" style="display: inline-block;">
+                            <input class="form-control" type="text" autocomplete="off" name="cep" id="cep"
+                                placeholder="." onchange="pesquisacep(this.val)">
+                            <label for="" id="" style="width: 400px;">CEP <span class="obg">*</span></label>
                         </div>
-                        <div class="div-input col-12">
-                            <div class="col-3 justify-content-center">
-                                <label for="" style="display: block;">Observações Gerais</label>
-                            </div>
-                            <div class="col-12 justify-content-center">
-                                <textarea name="" id="" cols="180" rows="5" style="font-size: 11pt;"></textarea>
-                            </div>
+                        <div class="div-input mb-3 col-3" style="display: inline-block; margin-top: 35px;">
+                            <select class="form-select" aria-label="Default select example" id="uf">
+                                <option value="" selected>UF</option>
+                                <option value="AC">Acre</option>
+                                <option value="AL">Alagoas</option>
+                                <option value="AP">Amapá</option>
+                                <option value="AM">Amazonas</option>
+                                <option value="BA">Bahia</option>
+                                <option value="CE">Ceará</option>
+                                <option value="DF">Distrito Federal</option>
+                                <option value="ES">Espirito Santo</option>
+                                <option value="GO">Goiás</option>
+                                <option value="MA">Maranhão</option>
+                                <option value="MS">Mato Grosso do Sul</option>
+                                <option value="MT">Mato Grosso</option>
+                                <option value="MG">Minas Gerais</option>
+                                <option value="PA">Pará</option>
+                                <option value="PB">Paraíba</option>
+                                <option value="PR">Paraná</option>
+                                <option value="PE">Pernambuco</option>
+                                <option value="PI">Piauí</option>
+                                <option value="RJ">Rio de Janeiro</option>
+                                <option value="RN">Rio Grande do Norte</option>
+                                <option value="RS">Rio Grande do Sul</option>
+                                <option value="RO">Rondônia</option>
+                                <option value="RR">Roraima</option>
+                                <option value="SC">Santa Catarina</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="SE">Sergipe</option>
+                                <option value="TO">Tocantins</option>
+                            </select>
+                        </div>
+                        <div class="div-input form-floating mb-3 m-l-10 col-3" style="display: inline-block;">
+                            <input class="form-control" type="text" autocomplete="off" name="cidade" id="cidade"
+                                placeholder=".">
+                            <label for="" id="" style="width: 400px;">Cidade <span class="obg">*</span></label>
+                        </div>
+                        <div class="div-input form-floating mb-3 m-l-10 col-4" style="display: inline-block;">
+                            <input class="form-control" type="text" autocomplete="off" name="bairro" id="bairro"
+                                placeholder=".">
+                            <label for="" id="" style="width: 400px;">Bairro <span class="obg">*</span></label>
+                        </div>
+                        <div class="div-input form-floating mb-3 m-l-10 col-7" style="display: inline-block;">
+                            <input class="form-control" type="text" autocomplete="off" name="Endereço" id="endereco"
+                                placeholder=".">
+                            <label for="" id="" style="width: 400px;">Endereço <span class="obg">*</span></label>
+                        </div>
+                        <div class="div-input form-floating mb-3 m-l-10 col-2" style="display: inline-block;">
+                            <input class="form-control" type="text" autocomplete="off" name="num" id="num"
+                                placeholder=".">
+                            <label for="" id="" style="width: 400px;">Numero <span class="obg">*</span></label>
                         </div>
                     </div>
                     <!-- Fim dados -->
@@ -606,46 +482,52 @@
         <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
         <!-- Inicio Modal-->
         <div class="col-12">
-            <div class="modal fade" id="associacaoFornecedor" tabindex="-1" role="dialog">
+            <div class="modal" id="modal_1" style="z-index: 9999;">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="defaultModalLabel">Replicar Fornecedor para:</h4>
+                            <h4 class="modal-title" id="defaultModalLabel">Cadastro de Oficina</h4>
                         </div>
-                        <form name="form-sms" method="get" accept-charset="utf-8">
-                            <div class="modal-body">
-                                <div class="row clearfix" style="padding-top: 8px;">
-                                    <div class="card">
-                                        <div class="body">
-                                            <h4 class="justify-content-center">Fornecedor disponivel para : </h4>
-                                            <div class="row" style="padding: 8px; display: -webkit-inline-box;">
-                                                <div class="col-md-8 i-m-b-5" style=" display: contents">
-                                                    <div class="col-md-7 i-m-b-5" style="padding-top:15px">
-                                                        <div class="form-line">
-                                                            <select id="associacaoAtivas" class="form-control select2"
-                                                                style="width: 100%;">
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-primary waves-effect"
-                                                            id="botao_salvar_item">
-                                                            <i class="material-icons">save</i>
-                                                            <span>Salvar</span>
-                                                        </button>
-                                                        <button type="button" class="btn bg-red waves-effect"
-                                                            data-dismiss="modal" id="botao_fechar_item">
-                                                            <i class="material-icons">close</i>
-                                                            <span>Fechar</span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="">
+                            <div class="col-12 justify-content-center"><label for="">CNPJ</label></div>
+                            <div class="col-12 justify-content-center m-b-10">
+                                <input type="text" style="width: 90%; display: block; border: solid 1px lightgray;
+                                height: 30px;" id="cnpj_modal">
                             </div>
-                        </form>
+                            <div class="col-1" style="float: right; margin-right: 50px; margin-bottom: 5px;">
+                                <button class="btn btn-success">Buscar</button>
+                            </div>
+                        </div>
+                        <div class="card" style="margin: 10px; padding: 5px; display: inline-block;">
+                            <div class="">
+                                <label for="">Razão Social</label>
+                                <input type="text" id="rz_social_m" style="width: 100%;">
+                            </div>
+                            <div class="">
+                                <label for="">Nome Fantasia</label>
+                                <input type="text" id="nm_fant_m" style="width: 100%;">
+                            </div>
+                            <div class="col-3" style="display: inline-block; margin-right: 7%;">
+                                <label for="">CEP</label>
+                                <input type="text" id="cep_m" style="width: 100%;">
+                            </div>
+                            <div class="col-8" style="display: inline-block;">
+                                <label for="">Endereço</label>
+                                <input type="text" id="end_m" style="width: 100%;">
+                            </div>
+                            <div class="col-4" style="display: inline-block; margin-right: 7%;">
+                                <label for="">Bairro</label>
+                                <input type="text" id="bair_m">
+                            </div>
+                            <div class="col-4" style="display: inline-block; margin-right: 7%;">
+                                <label for="">Cidade</label>
+                                <input type="text" id="cid_m">
+                            </div>
+                            <div class="col-2" style="display: inline-block;">
+                                <label for="">UF</label>
+                                <input type="text" id="uf_m" style="width: 100%;">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -673,6 +555,15 @@
             }
             document.querySelectorAll('.tab-pane')[tab].style.display = ''
             document.querySelectorAll('.tab-select')[tab].classList.add('act')
+        }
+
+        function consultaCNPJ() {
+            let cnpj = document.getElementById('cnpj_modal').value;
+            if (cnpj == null)
+                parent.ebfFlowExecute('Geral - Sweet Alert Notificar', parent.ebfListParamsCreate(0, 'Informe o CNPJ antes de proceguir'));
+            else {
+                parent.ebfFlowExecute('Chamar ReceitaWS - Integracao', parent.ebfListParamsCreate(cnpj));
+            }
         }
 
         function pesquisacep() {
@@ -715,33 +606,6 @@
             ) {
 
             }
-        }
-
-        function preencherInfor(lista) {
-            document.getElementById('razao_social').value;
-            document.getElementById('nome_fantasia').value;
-            document.getElementById('telefone_1').value;
-            document.getElementById('telefone_2').value;
-            document.getElementById('email').value;
-            document.getElementById('email2').value;
-            document.getElementById('data_cadastro').value;
-            document.getElementById('usu_resp').value;
-            document.getElementById('qnt_max_veiculos').value;
-            document.getElementById('empresa_resp').value;
-            document.getElementById('cep').value;
-            document.getElementById('uf').value;
-            document.getElementById('cidade').value;
-            document.getElementById('bairro').value;
-            document.getElementById('endereco').value;
-            document.getElementById('num').value;
-            document.getElementById('oficina_credenciada').checked;
-            document.getElementById('oficina_desabilitada').checked;
-            document.getElementById('banco').value;
-            document.getElementById('agencia').value;
-            document.getElementById('conta').value;
-            document.getElementById('responsavel').value;
-            document.getElementById('favorecido').value;
-            document.getElementById('cpf_cnpj_banco').value;
         }
 
         function obterDados() {
