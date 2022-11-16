@@ -118,53 +118,7 @@
         }
     </style>
 
-    <script>
-        function removerMascara(obj) {
-            var ret;
-            if (j(obj).hasClass('cnpj-format')) {
-                ret = obj.value.replace('.', '').replace('.', '').replace('/', '').replace('-', '').replace(' ', '').replace(' ', '').replace(' ', '');
-            }
-            else if (j(obj).hasClass('cep-format')) {
-                ret = obj.value.replace('-', '');
-            }
-            else {
-                ret = obj.value;
-            }
-            return ret;
-        };
 
-        j("#estado").inputmask("AA", { "placeholder": "" });
-
-        function meu_callback(conteudo) {
-            if (!("erro" in conteudo)) {
-                document.getElementById('endereco').value = (conteudo.logradouro);
-                document.getElementById('bairro').value = (conteudo.bairro);
-                document.getElementById('cidade').value = (conteudo.localidade);
-                document.getElementById('estado').value = (conteudo.uf);
-            }
-            else {
-                limpa_formulário_cep();
-                alert("CEP não encontrado.");
-            }
-        }
-        function limpa_formulário_cep() {
-            document.getElementById('endereco').value = ("");
-            document.getElementById('bairro').value = ("");
-            document.getElementById('cidade').value = ("");
-            document.getElementById('estado').value = ("");
-        }
-
-
-
-        function maskaraCPFCNPJ(el) {
-            var tamanho = el.value.replace('.', '').replace('.', '').replace('-', '').replace('/', '').length;
-            if (tamanho > 11) {
-                j(el).inputmask("99.999.999/9999-99", { "placeholder": "" });
-            } else {
-                j(el).inputmask("999.999.999-99[9]", { "placeholder": "" });
-            }
-        };
-    </script>
 
 </head>
 
@@ -175,7 +129,7 @@
                 <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
                 <!-- Inicio parte de preenchimento de informações -->
                 <div class="card">
-                    <div class="col-12" style="display: inline; margin-left: 45px; margin-top: 3px;">
+                    <div class="col-12" style="display: inline; margin-left: 65px; margin-top: 3px;">
                         <ul id="nav-ul">
                             <li role="presentation" class="tab-select act" id="pagina_cad">
                                 <a href="#pagina_cadastro" data-toggle="tab" onclick="alterTab(0)">
@@ -203,7 +157,7 @@
                                     </i>
                                 </div>
                             </li>
-                            <li role="presentation" class="tab-select" id="pagina_cad">
+                            <li role="presentation" class="tab-select" id="pagina_cad" style="display: none;">
                                 <a href="#pagina_indicadores" data-toggle="tab" onclick="alterTab(3)">
                                     Indicadores
                                 </a>
@@ -260,11 +214,11 @@
                             <label for="" id="" style="width: 400px;">Email 2</label>
                         </div>
                         <!-- info adicionais -->
-                        <div class="div-input form-floating mb-3 m-l-10 col-2" style="display: inline-block;">
+                        <!--  <div class="div-input form-floating mb-3 m-l-10 col-2" style="display: inline-block;">
                             <input class="form-control" type="date" autocomplete="off" name="dataDeCadastro"
                                 id="data_cadastro" placeholder="." readonly>
                             <label for="" id="" style="width: 400px;">Data de Cadastro</label>
-                        </div>
+                        </div> -->
                         <div class="div-input form-floating mb-3 m-l-10 col-2" style="display: inline-block;">
                             <input class="form-control" type="number" autocomplete="off" name="qntMaximaVeiculos"
                                 id="qnt_max_veiculos" placeholder=".">
@@ -479,10 +433,11 @@
             </div>
         </div>
         <!-- Fim cadastro -->
+        <input type="text" name="" id="cnpj_seg" style="display: none;">
         <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
         <!-- Inicio Modal-->
         <div class="col-12">
-            <div class="modal" id="modal_1" style="z-index: 9999;">
+            <div class="modal" id="modal_1" style="z-index: 9999; display: block;">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -495,7 +450,7 @@
                                 height: 30px;" id="cnpj_modal">
                             </div>
                             <div class="col-1" style="float: right; margin-right: 50px; margin-bottom: 5px;">
-                                <button class="btn btn-success">Buscar</button>
+                                <button class="btn btn-success" onclick="consultaCNPJ()">Buscar</button>
                             </div>
                         </div>
                         <div class="card" style="margin: 10px; padding: 5px; display: inline-block;">
@@ -528,11 +483,64 @@
                                 <input type="text" id="uf_m" style="width: 100%;">
                             </div>
                         </div>
+                        <div class="col-12" style="padding: 5px;">
+                            <div class="col-2" style="float: right;">
+                                <button class="btn btn-primary" id="btn_next" disabled="disabled" onclick="obterDados()"
+                                    style="margin-right: 15px;">Proximo</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        function removerMascara(obj) {
+            var ret;
+            if (j(obj).hasClass('cnpj-format')) {
+                ret = obj.value.replace('.', '').replace('.', '').replace('/', '').replace('-', '').replace(' ', '').replace(' ', '').replace(' ', '');
+            }
+            else if (j(obj).hasClass('cep-format')) {
+                ret = obj.value.replace('-', '');
+            }
+            else {
+                ret = obj.value;
+            }
+            return ret;
+        };
+
+        j("#estado").inputmask("AA", { "placeholder": "" });
+
+        function meu_callback(conteudo) {
+            if (!("erro" in conteudo)) {
+                document.getElementById('endereco').value = (conteudo.logradouro);
+                document.getElementById('bairro').value = (conteudo.bairro);
+                document.getElementById('cidade').value = (conteudo.localidade);
+                document.getElementById('estado').value = (conteudo.uf);
+            }
+            else {
+                limpa_formulário_cep();
+                alert("CEP não encontrado.");
+            }
+        }
+        function limpa_formulário_cep() {
+            document.getElementById('endereco').value = ("");
+            document.getElementById('bairro').value = ("");
+            document.getElementById('cidade').value = ("");
+            document.getElementById('estado').value = ("");
+        }
+
+
+
+        function maskaraCPFCNPJ(el) {
+            var tamanho = el.value.replace('.', '').replace('.', '').replace('-', '').replace('/', '').length;
+            if (tamanho > 11) {
+                j(el).inputmask("99.999.999/9999-99", { "placeholder": "" });
+            } else {
+                j(el).inputmask("999.999.999-99[9]", { "placeholder": "" });
+            }
+        };
+    </script>
     <script>
         var tipo;
 
@@ -557,12 +565,82 @@
             document.querySelectorAll('.tab-select')[tab].classList.add('act')
         }
 
+        function validarCNPJ(cnpj) {
+
+            cnpj = cnpj.replace(/[^\d]+/g, '');
+
+            if (cnpj == '') return false;
+
+            if (cnpj.length != 14)
+                return false;
+
+            // Elimina CNPJs invalidos conhecidos
+            if (cnpj == "00000000000000" ||
+                cnpj == "11111111111111" ||
+                cnpj == "22222222222222" ||
+                cnpj == "33333333333333" ||
+                cnpj == "44444444444444" ||
+                cnpj == "55555555555555" ||
+                cnpj == "66666666666666" ||
+                cnpj == "77777777777777" ||
+                cnpj == "88888888888888" ||
+                cnpj == "99999999999999")
+                return false;
+
+            // Valida DVs
+            tamanho = cnpj.length - 2
+            numeros = cnpj.substring(0, tamanho);
+            digitos = cnpj.substring(tamanho);
+            soma = 0;
+            pos = tamanho - 7;
+            for (i = tamanho; i >= 1; i--) {
+                soma += numeros.charAt(tamanho - i) * pos--;
+                if (pos < 2)
+                    pos = 9;
+            }
+            resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+            if (resultado != digitos.charAt(0))
+                return false;
+
+            tamanho = tamanho + 1;
+            numeros = cnpj.substring(0, tamanho);
+            soma = 0;
+            pos = tamanho - 7;
+            for (i = tamanho; i >= 1; i--) {
+                soma += numeros.charAt(tamanho - i) * pos--;
+                if (pos < 2)
+                    pos = 9;
+            }
+            resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+            if (resultado != digitos.charAt(1))
+                return false;
+
+            return true;
+
+        }
+
         function consultaCNPJ() {
             let cnpj = document.getElementById('cnpj_modal').value;
-            if (cnpj == null)
-                parent.ebfFlowExecute('Geral - Sweet Alert Notificar', parent.ebfListParamsCreate(0, 'Informe o CNPJ antes de proceguir'));
-            else {
-                parent.ebfFlowExecute('Chamar ReceitaWS - Integracao', parent.ebfListParamsCreate(cnpj));
+            if (validarCNPJ(cnpj)) {
+                if (cnpj == null || cnpj == '') {
+                    parent.ebfFlowExecute('Geral - Sweet Alert Notificar', parent.ebfListParamsCreate(0, 'Informe o CNPJ antes de prosseguir'));
+                    document.getElementById('btn_next').setAttribute('disabled', 'disabled');
+                }
+                else {
+                    let r = parent.ebfFlowExecute('Chamar ReceitaWS - Integracao', parent.ebfListParamsCreate(cnpj));
+                    if (r) {
+                        document.getElementById('btn_next').removeAttribute('disabled');
+                        document.getElementById('cnpj_seg').value = `${cnpj}`;
+                    }
+                    else {
+                        document.getElementById('cnpj_seg').value = '';
+                        parent.ebfFlowExecute('Geral - Sweet Alert Notificar', parent.ebfListParamsCreate(0, 'Informe um CNPJ válido para prosseguir'));
+                    }
+                }
+            }
+            if (cnpj == null || cnpj == '') {
+                parent.ebfFlowExecute('Geral - Sweet Alert Notificar', parent.ebfListParamsCreate(0, 'Informe um CNPJ válido para prosseguir'));
+                document.getElementById('btn_next').setAttribute('disabled', 'disabled');
             }
         }
 
@@ -640,6 +718,40 @@
             if (document.getElementById('cCorrente').checked == 1)
                 return 1
             else return 2
+        }
+
+        let nume;
+        let email_j;
+        let tel_j;
+
+        function obterDados() {
+            document.getElementById('razao_social').value = document.getElementById('rz_social_m').value;
+            document.getElementById('nome_fantasia').value = document.getElementById('nm_fant_m').value;
+            document.getElementById('cep').value = document.getElementById('cep_m').value;
+            document.getElementById('endereco').value = document.getElementById('end_m').value;
+            document.getElementById('bairro').value = document.getElementById('bair_m').value;
+            document.getElementById('cidade').value = document.getElementById('cid_m').value;
+            document.getElementById('uf').value = document.getElementById('uf_m').value;
+            /*  */
+            document.getElementById('razao_social').setAttribute('disabled', 'disabled')
+            document.getElementById('nome_fantasia').setAttribute('disabled', 'disabled')
+            document.getElementById('cep').setAttribute('disabled', 'disabled')
+            document.getElementById('endereco').setAttribute('disabled', 'disabled')
+            document.getElementById('cidade').setAttribute('disabled', 'disabled')
+            document.getElementById('uf').setAttribute('disabled', 'disabled')
+            document.getElementById('bairro').setAttribute('disabled', 'disabled')
+            /*  */
+            if (nume != undefined && nume != null) {
+                document.getElementById('num').value = nume
+                document.getElementById('num').setAttribute('disabled', 'disabled')
+            }
+            if (tel_j != undefined && tel_j != null)
+                document.getElementById('telefone_1').value = tel_j;
+            if (email_j != undefined && email_j != null)
+                document.getElementById('email').value = email_j;
+            /*  */
+            document.getElementById('modal_1').style.display = 'none';
+            /*  */
         }
     </script>
 
