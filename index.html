@@ -63,6 +63,7 @@
 
         input {
             font-size: 80% !important;
+            padding-left: 5px;
         }
 
         .tel {
@@ -117,9 +118,6 @@
             border-radius: 5px;
         }
     </style>
-
-
-
 </head>
 
 <body>
@@ -129,7 +127,7 @@
                 <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
                 <!-- Inicio parte de preenchimento de informações -->
                 <div class="card">
-                    <div class="col-12" style="display: inline; margin-left: 65px; margin-top: 3px;">
+                    <div class="col-12" style="display: inline; margin-left: 95px; margin-top: 3px;">
                         <ul id="nav-ul">
                             <li role="presentation" class="tab-select act" id="pagina_cad">
                                 <a href="#pagina_cadastro" data-toggle="tab" onclick="alterTab(0)">
@@ -196,7 +194,7 @@
                                 placeholder="." onchange="pesquisacep(this.val)">
                             <label for="" id="" style="width: 400px;">CEP <span class="obg">*</span></label>
                         </div>
-                        <div class="div-input mb-3 col-3" style="display: inline-block; margin-top: 35px;">
+                        <div class="div-input mb-3 col-3" style="display: inline-block;">
                             <select class="form-select" aria-label="Default select example" id="uf">
                                 <option value="" selected>UF</option>
                                 <option value="AC">Acre</option>
@@ -247,6 +245,9 @@
                             <input class="form-control" type="text" autocomplete="off" name="num" id="num"
                                 placeholder=".">
                             <label for="" id="" style="width: 400px;">Numero <span class="obg">*</span></label>
+                        </div>
+                        <div class="col-1" style="position: absolute; right: 0; bottom: 10px;">
+                            <button class="btn btn-success" onclick="saveData()">Salvar</button>
                         </div>
                     </div>
                     <!-- Fim dados -->
@@ -299,7 +300,7 @@
                     <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
                     <!-- Inicio Modal-->
                     <div class="col-12">
-                        <div class="modal" id="modal_1" style="z-index: 9999;">
+                        <div class="modal" id="modal_1" style="z-index: 9999; display: block;">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -308,48 +309,51 @@
                                     <div class="">
                                         <div class="col-12 justify-content-center"><label for="">CNPJ</label></div>
                                         <div class="col-12 justify-content-center m-b-10">
-                                            <input type="text" style="width: 90%; display: block; border: solid 1px lightgray;
-                                height: 30px;" id="cnpj_modal">
+                                            <input type="text"
+                                                style="width: 90%; display: block; border: solid 1px lightgray; height: 30px;"
+                                                id="cnpj_modal" autocomplete="off">
                                         </div>
-                                        <div class="col-1"
-                                            style="float: right; margin-right: 50px; margin-bottom: 5px;">
-                                            <button class="btn btn-success" onclick="consultaCNPJ()">Buscar</button>
+                                        <div class="col-11">
+                                            <div class="col-1"
+                                                style="float: right; margin-right: 31px; margin-bottom: 5px;">
+                                                <button class="btn btn-success" onclick="consultaCNPJ()">Buscar</button>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="card" style="margin: 10px; padding: 5px; display: inline-block;">
-                                        <div class="">
+                                        <div class="col-12">
                                             <label for="">Razão Social</label>
-                                            <input type="text" id="rz_social_m" style="width: 100%;">
+                                            <input type="text" id="rz_social_m" style="width: 100%;" disabled>
                                         </div>
-                                        <div class="">
+                                        <div class="col-12">
                                             <label for="">Nome Fantasia</label>
-                                            <input type="text" id="nm_fant_m" style="width: 100%;">
+                                            <input type="text" id="nm_fant_m" style="width: 100%;" disabled>
                                         </div>
                                         <div class="col-3" style="display: inline-block; margin-right: 7%;">
                                             <label for="">CEP</label>
-                                            <input type="text" id="cep_m" style="width: 100%;">
+                                            <input type="text" id="cep_m" style="width: 100%;" disabled>
                                         </div>
                                         <div class="col-8" style="display: inline-block;">
                                             <label for="">Endereço</label>
-                                            <input type="text" id="end_m" style="width: 100%;">
+                                            <input type="text" id="end_m" style="width: 100%;" disabled>
                                         </div>
                                         <div class="col-4" style="display: inline-block; margin-right: 7%;">
                                             <label for="">Bairro</label>
-                                            <input type="text" id="bair_m">
+                                            <input type="text" id="bair_m" disabled>
                                         </div>
                                         <div class="col-4" style="display: inline-block; margin-right: 7%;">
                                             <label for="">Cidade</label>
-                                            <input type="text" id="cid_m">
+                                            <input type="text" id="cid_m" disabled>
                                         </div>
                                         <div class="col-2" style="display: inline-block;">
                                             <label for="">UF</label>
-                                            <input type="text" id="uf_m" style="width: 100%;">
+                                            <input type="text" id="uf_m" style="width: 100%;" disabled>
                                         </div>
                                     </div>
-                                    <div class="col-12" style="padding: 5px;">
+                                    <div class="col-11" style="padding: 5px;">
                                         <div class="col-2" style="float: right;">
-                                            <button class="btn btn-primary" id="btn_next" disabled="disabled"
-                                                onclick="obterDados()" style="margin-right: 15px;">Proximo</button>
+                                            <button class="btn btn-primary" style="margin-left: 15px;" id="btn_next"
+                                                disabled="disabled" onclick="obterDados()">Proximo</button>
                                         </div>
                                     </div>
                                 </div>
@@ -536,19 +540,6 @@
                         document.getElementById(id).checked = 1;
                     }
 
-                    function dadosObrigatorios() {
-                        if (
-                            nome != null &&
-                            cpf_cnpj != null &&
-                            validacaoEmail &&
-                            data_nasc != null
-                        ) {
-
-                        }
-                    }
-
-
-
                     function obterTipoConta() {
                         if (document.getElementById('cCorrente').checked == 1)
                             return 1
@@ -580,14 +571,20 @@
                             document.getElementById('num').value = nume
                             document.getElementById('num').setAttribute('disabled', 'disabled')
                         }
-                        if (tel_j != undefined && tel_j != null)
+                        if (tel_j != undefined && tel_j != null && tel_j.replace(/ /g, '') != '') {
                             document.getElementById('telefone_1').value = tel_j;
-                        if (email_j != undefined && email_j != null)
+                            document.getElementById('telefone_1').setAttribute('disabled', 'disabled');
+                        }
+                        if (email_j != undefined && email_j != null && email_j.replace(/ /g, '') != '') {
                             document.getElementById('email').value = email_j;
+                            document.getElementById('email').setAttribute('disabled', 'disabled')
+                        }
                         /*  */
                         document.getElementById('modal_1').style.display = 'none';
                         /*  */
                     }
+
+                    let ids_inp = ['telefone_1', 'qnt_max_veiculos', 'email', 'cep', 'uf', 'cidade', 'bairro', 'endereco', 'num']
 
                     function oData() {
                         let tel_1_ = document.getElementById('telefone_1').value;
@@ -601,13 +598,30 @@
                         let bairro_ = document.getElementById('bairro').value;
                         let ende_ = document.getElementById('endereco').value;
                         let numero_ = document.getElementById('num').value;
-                        let lista = [tel_1_, tel_2_, email_1_, email_2_, qte_max_vei_, cep_, uf_, cidade_, bairro_, ende_, numero_];
-                        for (let i = 0; i < lista.length; i++) {
-                            if (lista[i] == null || lista[i] == undefined || lista[i].replace(/\s/g, '') == '')
+                        cep_ = cep_.replace(/\s/g, '');
+                        cep_ = cep_.replace(/-/g, '');
+                        cep_ = cep_.replace(/\./g, '');
+                        let lista = [tel_1_, qte_max_vei_, email_1_, cep_, uf_, cidade_, bairro_, ende_, numero_, tel_2_, email_2_];
+                        for (let i = 0; i < 9; i++) {
+                            document.getElementById(ids_inp[i]).style.borderColor = 'lightgray'
+                            if (lista[i] == null || lista[i] == undefined || lista[i].replace(/\s/g, '') == '') {
                                 lista[0] = 'protocol0'
-                            console.log(lista[i]);
+                                document.getElementById(ids_inp[i]).style.borderColor = 'red'
+                            }
                         }
                         return lista;
+                    }
+
+                    function sleep(ms) {
+                        return new Promise(resolve => setTimeout(resolve, ms));
+                    }
+
+                    function saveData() {
+                        let p = parent.ebfFlowExecute('Novo cadastro de oficinas - Salvar dados oficina', null);
+                        sleep(5000)
+                        if (p) {
+                            window.location.href = "https://siga.arcoconsultoria.com/SIGA/open.do?sys=SIG";
+                        }
                     }
 
                 </script>
