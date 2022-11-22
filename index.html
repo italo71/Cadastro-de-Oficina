@@ -137,14 +137,6 @@
                                     <i class="material-icons" style="font-size: 14pt;">how_to_reg</i>
                                 </div>
                             </li>
-                            <!-- <li role="presentation" class="tab-select" id="pagina_cad">
-                                <a href="#pagina_dados_bancarios" data-toggle="tab" onclick="alterTab(1)">
-                                    Dados Bancarios
-                                </a>
-                                <div style="display: inline-block; position: relative; top: 4px;">
-                                    <i class="material-icons" style="font-size: 14pt;">payments</i>
-                                </div>
-                            </li> -->
                         </ul>
                     </div>
                     <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
@@ -250,50 +242,6 @@
                             <button class="btn btn-success" onclick="saveData()">Salvar</button>
                         </div>
                     </div>
-                    <!-- Fim dados -->
-                    <!-- Inicio dados bancarios-->
-                    <!-- <div class="tab-pane row" id="pagina_dados_bancarios">
-                        <div class="div-input">
-                            <label for="">Tipo de Conta</label>
-                            <input type="radio" name="tipoConta" style="display: inline-block;" id="cCorrente"><label
-                                onclick="selectRadio('cCorrente')" for=""
-                                style="display: inline-block; margin-left: -20px; margin-right: 5px;">Corrente</label>
-                            <input type="radio" name="tipoConta" style="display: inline-block;" id="cPupanca"><label
-                                onclick="selectRadio('cPupanca')" for=""
-                                style="display: inline-block; margin-left: -20px; margin-right: 5px;">Poupança</label>
-                        </div>
-                        <div class="div-input form-floating mb-3 m-l-10 col-3" style="display: inline-block;">
-                            <input class="form-control" type="text" autocomplete="off" name="Banco" id="banco"
-                                placeholder=".">
-                            <label for="" id="" style="width: 400px;">Banco</label>
-                        </div>
-                        <div class="div-input form-floating mb-3 m-l-10 col-3" style="display: inline-block;">
-                            <input class="form-control" type="text" autocomplete="off" name="agencia" id="agencia"
-                                placeholder=".">
-                            <label for="" id="" style="width: 400px;">Agencia</label>
-                        </div>
-                        <div class="div-input form-floating mb-3 m-l-10 col-3" style="display: inline-block;">
-                            <input class="form-control" type="text" autocomplete="off" name="conta" id="conta"
-                                placeholder=".">
-                            <label for="" id="" style="width: 400px;">Conta</label>
-                        </div>
-                        <div class="div-input form-floating mb-3 m-l-10 col-3" style="display: inline-block;">
-                            <input class="form-control" type="text" autocomplete="off" name="responsalve"
-                                id="responsavel" placeholder=".">
-                            <label for="" id="" style="width: 400px;">Responsálve</label>
-                        </div>
-                        <div class="div-input form-floating mb-3 m-l-10 col-3" style="display: inline-block;">
-                            <input class="form-control" type="text" autocomplete="off" name="favorecido" id="favorecido"
-                                placeholder=".">
-                            <label for="" id="" style="width: 400px;">Favorecido</label>
-                        </div>
-                        <div class="div-input form-floating mb-3 m-l-10 col-3" style="display: inline-block;">
-                            <input class="form-control" type="text" autocomplete="off" name="cpf_cnpj_banco"
-                                id="cpf_cnpj_banco" placeholder="." onkeyup="maskaraCPFCNPJ(this)">
-                            <label for="" id="" style="width: 400px;">CPF/CNPJ</label>
-                        </div>
-                    </div> -->
-                    <!-- Fim dados bancarios -->
                     <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
                     <!-- Fim cadastro -->
                     <input type="text" name="" id="cnpj_seg" style="display: none;">
@@ -490,6 +438,7 @@
                             if (cnpj == null || cnpj == '') {
                                 parent.ebfFlowExecute('Geral - Sweet Alert Notificar', parent.ebfListParamsCreate(0, 'Informe o CNPJ antes de prosseguir'));
                                 document.getElementById('btn_next').setAttribute('disabled', 'disabled');
+                                limpaModal();
                             }
                             else {
                                 let r = parent.ebfFlowExecute('Chamar ReceitaWS - Integracao', parent.ebfListParamsCreate(cnpj));
@@ -499,13 +448,27 @@
                                 }
                                 else {
                                     document.getElementById('cnpj_seg').value = '';
+                                    document.getElementById('btn_next').setAttribute('disabled', 'disabled');
+                                    limpaModal();
                                     parent.ebfFlowExecute('Geral - Sweet Alert Notificar', parent.ebfListParamsCreate(0, 'Informe um CNPJ válido para prosseguir'));
                                 }
                             }
                         }
+                        else {
+                            document.getElementById('btn_next').setAttribute('disabled', 'disabled');
+                            parent.ebfFlowExecute('Geral - Sweet Alert Notificar', parent.ebfListParamsCreate(0, 'Informe um CNPJ válido para prosseguir'));
+                            limpaModal();
+                        }
                         if (cnpj == null || cnpj == '') {
                             parent.ebfFlowExecute('Geral - Sweet Alert Notificar', parent.ebfListParamsCreate(0, 'Informe um CNPJ válido para prosseguir'));
                             document.getElementById('btn_next').setAttribute('disabled', 'disabled');
+                            limpaModal();
+                        }
+                    }
+                    let ids_m_info = [rz_social_m, nm_fant_m, cep_m, end_m, bair_m, cid_m, uf_m]
+                    function limpaModal() {
+                        for (let i = 0; i < ids_m_info.length; i++) {
+                            document.getElementById(ids_m_info[i]).value = ''
                         }
                     }
 
