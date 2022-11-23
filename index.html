@@ -404,6 +404,55 @@
                         document.querySelectorAll('.tab-select')[tab].classList.add('act')
                     }
 
+                    function emailsTest() {
+                        let em1 = document.getElementById('email').value;
+                        let em2 = document.getElementById('email2').value;
+                        let a = false, b = false;
+                        if (em1 != '')
+                            a = email_check('email');
+                        if (em2 == '' || em2 == null)
+                            b = true;
+                        else
+                            b = email_check('email2');
+                        if (a && b)
+                            return true
+                        else
+                            return false
+                    }
+
+                    function email_check(id) {
+                        let e = document.getElementById(id)
+                        if (validacaoEmail(e)) {
+                            e.style.borderColor = 'lightgray'
+                            return true
+                        }
+                        else {
+                            e.style.borderColor = 'red'
+                            e.value = ''
+                            parent.ebfFlowExecute('Geral - Sweet Alert Notificar', parent.ebfListParamsCreate(0, 'Informe um email válido'));
+                            return false
+                        }
+                    }
+
+                    function validacaoEmail(field) {
+                        usuario = field.value.substring(0, field.value.indexOf("@"));
+                        dominio = field.value.substring(field.value.indexOf("@") + 1, field.value.length);
+
+                        if ((usuario.length >= 1) &&
+                            (dominio.length >= 3) &&
+                            (usuario.search("@") == -1) &&
+                            (dominio.search("@") == -1) &&
+                            (usuario.search(" ") == -1) &&
+                            (dominio.search(" ") == -1) &&
+                            (dominio.search(".") != -1) &&
+                            (dominio.indexOf(".") >= 1) &&
+                            (dominio.lastIndexOf(".") < dominio.length - 1)) {
+                            return true
+                        }
+                        else
+                            return false
+                    }
+
                     function validarCNPJ(cnpj) {
 
                         cnpj = cnpj.replace(/[^\d]+/g, '');
@@ -412,38 +461,6 @@
 
                         if (cnpj.length != 14)
                             return false;
-
-                        function email_check(id) {
-                            let e = document.getElementById(id)
-                            if (validacaoEmail(e.value))
-                                e.style.borderColor = 'red'
-                            else {
-                                e.style.borderColor = 'lightgray'
-                                if(id == 'email'){
-                                    e.value = ''
-                                    parent.ebfFlowExecute('Geral - Sweet Alert Notificar', parent.ebfListParamsCreate(0, 'Informe um email válido'));
-                                }
-                            }
-                        }
-
-                        function validacaoEmail(field) {
-                            usuario = field.value.substring(0, field.value.indexOf("@"));
-                            dominio = field.value.substring(field.value.indexOf("@") + 1, field.value.length);
-
-                            if ((usuario.length >= 1) &&
-                                (dominio.length >= 3) &&
-                                (usuario.search("@") == -1) &&
-                                (dominio.search("@") == -1) &&
-                                (usuario.search(" ") == -1) &&
-                                (dominio.search(" ") == -1) &&
-                                (dominio.search(".") != -1) &&
-                                (dominio.indexOf(".") >= 1) &&
-                                (dominio.lastIndexOf(".") < dominio.length - 1)) {
-                                return true
-                            }
-                            else
-                                return false
-                        }
 
                         // Elimina CNPJs invalidos conhecidos
                         if (cnpj == "00000000000000" ||
@@ -631,6 +648,8 @@
                                 document.getElementById(ids_inp[i]).style.borderColor = 'red'
                             }
                         }
+                        if (!(emailsTest()))
+                            lista[0] = 'protocol0'
                         return lista;
                     }
 
