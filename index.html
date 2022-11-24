@@ -146,6 +146,7 @@
                     <!-- Cadastro -->
                     <!-- Inicio dados -->
                     <div class="tab-pane row" id="pagina_cadastro">
+                        <button class="btn btn-secondary" id="reload_btn" onclick="window.location.reload();" style="position: absolute; right: 10px; top: 5px; width: 90px; display: none;">Reload</button>
                         <div class="div-input form-floating mb-3 m-l-10 col-5" style="display: inline-block;">
                             <input class="form-control" type="text" autocomplete="off" name="razaoSocial"
                                 id="razao_social" placeholder=".">
@@ -254,7 +255,7 @@
                             <label for="" id="" style="width: 400px;">Numero <span class="obg">*</span></label>
                         </div>
                         <div class="col-1" style="position: absolute; right: 0; bottom: 10px;">
-                            <button class="btn btn-success" onclick="saveData()">Salvar</button>
+                            <button class="btn btn-success" id="s_btn" onclick="saveData()">Salvar</button>
                         </div>
                     </div>
                     <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
@@ -264,7 +265,7 @@
                     <!-- Inicio Modal-->
                     <div class="col-12">
                         <div class="modal" id="modal_1"
-                            style="z-index: 9999; background-color: rgba(0, 0, 0, 0.5);">
+                            style="z-index: 9999; background-color: rgba(0, 0, 0, 0.5); display: block;">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -325,7 +326,7 @@
                     </div>
                 </div>
 
-                <div class="modal" id="modal_2" style="z-index: 9999; display: block; background-color: rgba(0, 0, 0, 0.5);">
+                <div class="modal" id="modal_2" style="z-index: 9999; background-color: rgba(0, 0, 0, 0.5);">
                     <div class="row">
                         <div class="justify-content-center" style="margin-top: 25px;">
                             <div class="col-10">
@@ -333,16 +334,17 @@
                                     <div class="div-input form-floating mb-3 m-l-10 col-7"
                                         style="display: inline-block;">
                                         <input class="form-control" type="text" autocomplete="off" name="CNPJ"
-                                            id="cnpj_m_2" placeholder=".">
+                                            id="cnpj_m_2" placeholder="." disabled>
                                         <label for="" id="" style="width: 400px;">CNPJ</label>
                                     </div>
                                     <div class="col-7 m-l-10" style="display: inline-block;">
                                         <input class="" type="checkbox" autocomplete="off" name="desabilitada"
-                                            id="desab" placeholder="." style="display: inline-block;">
+                                            id="desab" placeholder="." style="display: inline-block;" disabled>
                                         <label for="" id=""
                                             style="width: 400px; display: inline-block; padding: 0;">Desabilitada</label>
                                     </div>
-                                    <button class="btn btn-danger" style="width: 90px; position: absolute; right: 10px;" onclick="fechaModa()">Fechar</button>
+                                    <button class="btn btn-danger" style="width: 90px; position: absolute; right: 10px;"
+                                        onclick="fechaModa()">Fechar</button>
                                 </div>
                             </div>
                         </div>
@@ -713,6 +715,24 @@
                         }
                     }
 
+                    function desabI() {
+                        document.getElementById('razao_social').setAttribute('disabled', 'disabled');
+                        document.getElementById('nome_fantasia').setAttribute('disabled', 'disabled');
+                        document.getElementById('cep').setAttribute('disabled', 'disabled');
+                        document.getElementById('endereco').setAttribute('disabled', 'disabled');
+                        document.getElementById('cidade').setAttribute('disabled', 'disabled');
+                        document.getElementById('uf').setAttribute('disabled', 'disabled');
+                        document.getElementById('bairro').setAttribute('disabled', 'disabled');
+                        document.getElementById('telefone_1').setAttribute('disabled', 'disabled');
+                        document.getElementById('telefone_2').setAttribute('disabled', 'disabled');
+                        document.getElementById('email').setAttribute('disabled', 'disabled');
+                        document.getElementById('email2').setAttribute('disabled', 'disabled');
+                        document.getElementById('qnt_max_veiculos').setAttribute('disabled', 'disabled');
+                        document.getElementById('vei_tip').setAttribute('disabled', 'disabled');
+                        document.getElementById('dt_cad').setAttribute('disabled', 'disabled');
+                        document.getElementById('s_btn').setAttribute('disabled', 'disabled');
+                        document.getElementById('s_btn').style.display = 'none';
+                    }
                 </script>
 
                 <!-- Jquery Core Js -->
