@@ -236,6 +236,13 @@
                                 placeholder=".">
                             <label for="" id="" style="width: 400px;">Bairro <span class="obg">*</span></label>
                         </div>
+                        <div class="div-input form-floating mb-3 m-l-10 col-2" style="display: inline-block;">
+                            <input class="form-control" type="text" autocomplete="off" name="dtCad" id="dt_cad"
+                                placeholder=".">
+                            <label for="" id="" style="width: 400px;">Data de Cadastro</label>
+                        </div>
+                        <div class="col-1" id="div_more" style="display: none;"><button class="btn btn-primary"
+                                onclick="moreInfo()" title="Mais informações">Mais +</button></div>
                         <div class="div-input form-floating mb-3 m-l-10 col-7" style="display: inline-block;">
                             <input class="form-control" type="text" autocomplete="off" name="Endereço" id="endereco"
                                 placeholder=".">
@@ -256,7 +263,8 @@
                     <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
                     <!-- Inicio Modal-->
                     <div class="col-12">
-                        <div class="modal" id="modal_1" style="z-index: 9999; display: block; background-color: rgba(0, 0, 0, 0.5);">
+                        <div class="modal" id="modal_1"
+                            style="z-index: 9999; background-color: rgba(0, 0, 0, 0.5);">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -316,6 +324,30 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="modal" id="modal_2" style="z-index: 9999; display: block; background-color: rgba(0, 0, 0, 0.5);">
+                    <div class="row">
+                        <div class="justify-content-center" style="margin-top: 25px;">
+                            <div class="col-10">
+                                <div class="card" style="padding: 10px;">
+                                    <div class="div-input form-floating mb-3 m-l-10 col-7"
+                                        style="display: inline-block;">
+                                        <input class="form-control" type="text" autocomplete="off" name="CNPJ"
+                                            id="cnpj_m_2" placeholder=".">
+                                        <label for="" id="" style="width: 400px;">CNPJ</label>
+                                    </div>
+                                    <div class="col-7 m-l-10" style="display: inline-block;">
+                                        <input class="" type="checkbox" autocomplete="off" name="desabilitada"
+                                            id="desab" placeholder="." style="display: inline-block;">
+                                        <label for="" id=""
+                                            style="width: 400px; display: inline-block; padding: 0;">Desabilitada</label>
+                                    </div>
+                                    <button class="btn btn-danger" style="width: 90px; position: absolute; right: 10px;" onclick="fechaModa()">Fechar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <script>
                     function removerMascara(obj) {
                         var ret;
@@ -331,6 +363,22 @@
                         return ret;
                     };
 
+                    function testeAtivado(num) {
+                        if (num) {
+                            return 1;
+                        }
+                        else {
+                            return 0;
+                        }
+                    }
+
+                    function fechaModa() {
+                        document.getElementById('modal_2').style.display = 'none';
+                    }
+
+                    function moreInfo() {
+                        document.getElementById('modal_2').style.display = 'block';
+                    }
 
                     function meu_callback(conteudo) {
                         if (!("erro" in conteudo)) {
