@@ -26,65 +26,52 @@
         .select2-selection__rendered {
             user-select: text;
         }
-
         * {
             margin: 0;
             padding: 0;
         }
-
         label {
             display: block;
             border-radius: 5px;
         }
-
         .div-input {
             margin: 15px;
         }
-
         .radio {
             margin-right: 5px !important;
         }
-
         .form-control:focus {
             box-shadow: none;
             border-top: none;
             border-left: none;
             border-right: none;
         }
-
         .form-control {
             box-shadow: none;
             border-top: none;
             border-left: none;
             border-right: none;
         }
-
         html {
             overflow-x: hidden;
         }
-
         input {
             font-size: 80% !important;
             padding-left: 5px;
         }
-
         .tel {
             margin-right: 7px;
         }
-
         .obg {
             color: red !important;
             margin-left: 3px;
         }
-
         #header {
             padding: 0 !important;
         }
-
         #nav-ul {
             list-style-type: none;
         }
-
         #nav-ul li {
             display: inline;
             border-bottom: solid 1px lightgray;
@@ -93,50 +80,43 @@
             border-top-right-radius: 5px;
             margin-right: 3px;
         }
-
         .act {
             border-bottom: solid 3px lightblue !important;
         }
-
         #nav-ul li:first-child {
             margin-left: -5.5%;
         }
-
         #nav-ul a {
             color: black;
             text-decoration: none;
         }
-
         #importacao_eventos option {
             font-size: 14px;
         }
-
         #importacao_eventos {
             font-size: 12.9px;
         }
-
         .modal-content input {
             border: solid 2px lightgray;
             border-radius: 5px;
             height: 26px;
         }
-
         .modal-content {
             margin-top: 25%;
         }
-
         .modal {
             height: 100%;
         }
-
         #t {
             position: absolute;
             top: 10%;
             bottom: 0;
         }
-
         #nav-ul li {
             display: inline-block;
+        }
+        .tveiculo{
+            margin-right: 5px !important;
         }
     </style>
 </head>
@@ -282,8 +262,8 @@
                             </div>
                             <div class="div-input form-floating mb-3 m-l-10 col-12" style="display: inline-block;">
                                 <div class="col-12" id="tips_vei">
-                                    <input type="checkbox" class="tveiculo" name="" id=""
-                                        value="@@val@@"><span>@@tipo@@</span><br>
+                                    <input type="checkbox" class="tveiculo" name="" id="@@count@@" value="@@val@@"><span
+                                        onclick="alterCheck('c@@count@@')">@@tipo@@</span><br>
                                 </div>
                             </div>
                         </div>
@@ -292,7 +272,8 @@
                         <input type="text" name="" id="cnpj_seg" style="display: none;">
                         <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
                         <!-- Inicio Modal-->
-                        <div class="modal" id="modal_1" style="z-index: 9999; background-color: rgba(0, 0, 0, 0.5); display: block;">
+                        <div class="modal" id="modal_1"
+                            style="z-index: 9999; background-color: rgba(0, 0, 0, 0.5); display: block;">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -571,6 +552,13 @@
                                 lista[i] = document.querySelectorAll('.tveiculo')[i].value;
                         }
                         return lista;
+                    }
+                    function alterCheck(id) {
+                        let o = document.getElementById(id);
+                        if (o.checked)
+                            o.checked = 0
+                        else
+                            o.checked = 1
                     }
                     function consultaCNPJ() {
                         let cnpj = document.getElementById('cnpj_modal').value
