@@ -26,52 +26,65 @@
         .select2-selection__rendered {
             user-select: text;
         }
+
         * {
             margin: 0;
             padding: 0;
         }
+
         label {
             display: block;
             border-radius: 5px;
         }
+
         .div-input {
             margin: 15px;
         }
+
         .radio {
             margin-right: 5px !important;
         }
+
         .form-control:focus {
             box-shadow: none;
             border-top: none;
             border-left: none;
             border-right: none;
         }
+
         .form-control {
             box-shadow: none;
             border-top: none;
             border-left: none;
             border-right: none;
         }
+
         html {
             overflow-x: hidden;
         }
+
         input {
             font-size: 80% !important;
             padding-left: 5px;
         }
+
         .tel {
             margin-right: 7px;
         }
+
         .obg {
             color: red !important;
             margin-left: 3px;
         }
+
         #header {
             padding: 0 !important;
         }
+
         #nav-ul {
             list-style-type: none;
         }
+
         #nav-ul li {
             display: inline;
             border-bottom: solid 1px lightgray;
@@ -80,43 +93,58 @@
             border-top-right-radius: 5px;
             margin-right: 3px;
         }
+
         .act {
             border-bottom: solid 3px lightblue !important;
         }
+
         #nav-ul li:first-child {
             margin-left: -5.5%;
         }
+
         #nav-ul a {
             color: black;
             text-decoration: none;
         }
+
         #importacao_eventos option {
             font-size: 14px;
         }
+
         #importacao_eventos {
             font-size: 12.9px;
         }
+
         .modal-content input {
             border: solid 2px lightgray;
             border-radius: 5px;
             height: 26px;
         }
+
         .modal-content {
             margin-top: 25%;
         }
+
         .modal {
             height: 100%;
         }
+
         #t {
             position: absolute;
             top: 10%;
             bottom: 0;
         }
+
         #nav-ul li {
             display: inline-block;
         }
-        .tveiculo{
+
+        .tveiculo {
             margin-right: 5px !important;
+        }
+
+        body{
+            background-color: lightgray !important;
         }
     </style>
 </head>
@@ -129,6 +157,8 @@
                     <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
                     <!-- Inicio parte de preenchimento de informações -->
                     <div class="card">
+                        <img src="https://siga.arcoconsultoria.com/SIGA/libsiga/images/icons/sigamycar.jpg" alt=""
+                            style="width: 20%; height: 14%; position: absolute;z-index: 99999; right: 10px; top: 2%;">
                         <div class="col-3" style="display: inline; margin-top: 3px;">
                             <ul id="nav-ul">
                                 <li role="presentation" class="tab-select act" id="pagina_cad">
@@ -266,14 +296,15 @@
                                         onclick="alterCheck('c@@count@@')">@@tipo@@</span><br>
                                 </div>
                             </div>
+                            <div class="col-1" style="position: absolute; right: 30px; bottom: 10px;">
+                                <button class="btn btn-success" id="s_btn" onclick="saveData()">Cadastrar</button>
+                            </div>
                         </div>
                         <!-- Fim cadastro -->
-
                         <input type="text" name="" id="cnpj_seg" style="display: none;">
                         <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
                         <!-- Inicio Modal-->
-                        <div class="modal" id="modal_1"
-                            style="z-index: 9999; background-color: rgba(0, 0, 0, 0.5); display: block;">
+                        <div class="modal" id="modal_1" style="z-index: 9999; background-color: rgba(0, 0, 0, 0.5); ">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -326,6 +357,7 @@
                                                 disabled="disabled" onclick="obterDados()">Proximo</button>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
