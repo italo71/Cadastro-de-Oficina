@@ -120,171 +120,200 @@
             border-radius: 5px;
             height: 26px;
         }
+
+        .modal-content {
+            margin-top: 25%;
+        }
+
+        .modal {
+            height: 100%;
+        }
+
+        #t {
+            position: absolute;
+            top: 10%;
+            bottom: 0;
+        }
+
+        #nav-ul li {
+            display: inline-block;
+        }
     </style>
 </head>
 
 <body>
-    <div class="container-fluid">
-        <div class="row">
-            <div id="page1" style="padding: 8px 0px 0px 25px;">
-                <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
-                <!-- Inicio parte de preenchimento de informações -->
-                <div class="card">
-                    <div class="col-12" style="display: inline; margin-left: 95px; margin-top: 3px;">
-                        <ul id="nav-ul">
-                            <li role="presentation" class="tab-select act" id="pagina_cad">
-                                <a href="#pagina_cadastro" data-toggle="tab" onclick="alterTab(0)">
-                                    Cadastro
-                                </a>
-                                <div style="display: inline-block; position: relative; top: 4px;">
-                                    <i class="material-icons" style="font-size: 14pt;">how_to_reg</i>
+    <div class="container-fluid" id="t">
+        <div class="justify-content-center">
+            <div class="row col-7">
+                <div id="page1" class="col-12" style="padding: 8px 0px 0px 0px;">
+                    <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
+                    <!-- Inicio parte de preenchimento de informações -->
+                    <div class="card">
+                        <div class="col-3" style="display: inline; margin-top: 3px;">
+                            <ul id="nav-ul">
+                                <li role="presentation" class="tab-select act" id="pagina_cad">
+                                    <a href="#pagina_cadastro" data-toggle="tab" onclick="alterTab(0)">
+                                        Cadastro
+                                    </a>
+                                    <div style="display: inline-block; position: relative; top: 4px;">
+                                        <i class="material-icons" style="font-size: 14pt;">how_to_reg</i>
+                                    </div>
+                                </li>
+                                <li role="presentation" class="tab-select act" id="pagina_tip">
+                                    <a href="#pagina_tip" data-toggle="tab" onclick="alterTab(1)">
+                                        Serviços
+                                    </a>
+                                    <div style="display: inline-block; position: relative; top: 4px;">
+                                        <i class="material-icons" style="font-size: 14pt;">how_to_reg</i>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
+                        <!-- Cadastro -->
+                        <!-- Inicio dados -->
+                        <div class="tab-pane row" id="pagina_cadastro">
+                            <div class="div-input form-floating mb-3 m-l-10 col-5" style="display: inline-block;">
+                                <input class="form-control" type="text" autocomplete="off" name="razaoSocial"
+                                    id="razao_social" placeholder=".">
+                                <label for="" id="" style="width: 400px;">Razão Social <span
+                                        class="obg">*</span></label>
+                            </div>
+                            <div class="div-input form-floating mb-3 m-l-10 col-4" style="display: inline-block;">
+                                <input class="form-control" type="text" autocomplete="off" name="nomeFantasia"
+                                    id="nome_fantasia" placeholder=".">
+                                <label for="" id="" style="width: 400px;">Nome Fantasia <span
+                                        class="obg">*</span></label>
+                            </div>
+                            <div class="div-input form-floating mb-3 m-l-10 col-3" style="display: inline-block;">
+                                <input class="form-control" type="text" autocomplete="off" name="Telefone1"
+                                    id="telefone_1" placeholder="." oninput="celMask('telefone_1')"
+                                    onchange="validaCel('telefone_1')">
+                                <label for="" id="" style="width: 400px;">Telefone 1 <span class="obg">*</span></label>
+                            </div>
+                            <div class="div-input form-floating mb-3 m-l-10 col-3" style="display: inline-block;">
+                                <input class="form-control" type="text" autocomplete="off" name="Telefone2"
+                                    id="telefone_2" placeholder="." onchange="celMask('telefone_2')">
+                                <label for="" id="" style="width: 400px;">Telefone 2</label>
+                            </div>
+                            <div class="div-input form-floating mb-3 m-l-10 col-5" style="display: inline-block;">
+                                <input class="form-control" type="text" autocomplete="off" name="email" id="email"
+                                    placeholder="." onchange="email_check('email')">
+                                <label for="" id="" style="width: 400px;">Email <span class="obg">*</span></label>
+                            </div>
+                            <div class="div-input form-floating mb-3 m-l-10 col-5" style="display: inline-block;">
+                                <input class="form-control" type="text" autocomplete="off" name="email2" id="email2"
+                                    placeholder="." onchange="email_check('email2')">
+                                <label for="" id="" style="width: 400px;">Email 2</label>
+                            </div>
+                            <!-- info adicionais -->
+                            <div class="div-input form-floating mb-3 m-l-10 col-3" style="display: inline-block;">
+                                <input class="form-control" type="number" autocomplete="off" name="qntMaximaVeiculos"
+                                    id="qnt_max_veiculos" placeholder=".">
+                                <label for="" id="" style="width: 600px;">Qte Máxima de Veículos <span
+                                        class="obg">*</span></label>
+                            </div>
+                            <!-- Localização -->
+                            <div class="div-input form-floating mb-3 m-l-10 col-3" style="display: inline-block;">
+                                <input class="form-control" type="text" autocomplete="off" name="cep" id="cep"
+                                    placeholder="." onchange="pesquisacep(this.val)">
+                                <label for="" id="" style="width: 400px;">CEP <span class="obg">*</span></label>
+                            </div>
+                            <div class="div-input mb-3" style="display: inline-block; width: 200px;">
+                                <select class="form-select" aria-label="Default select example" id="uf">
+                                    <option value="" selected>UF</option>
+                                    <option value="AC">Acre</option>
+                                    <option value="AL">Alagoas</option>
+                                    <option value="AP">Amapá</option>
+                                    <option value="AM">Amazonas</option>
+                                    <option value="BA">Bahia</option>
+                                    <option value="CE">Ceará</option>
+                                    <option value="DF">Distrito Federal</option>
+                                    <option value="ES">Espirito Santo</option>
+                                    <option value="GO">Goiás</option>
+                                    <option value="MA">Maranhão</option>
+                                    <option value="MS">Mato Grosso do Sul</option>
+                                    <option value="MT">Mato Grosso</option>
+                                    <option value="MG">Minas Gerais</option>
+                                    <option value="PA">Pará</option>
+                                    <option value="PB">Paraíba</option>
+                                    <option value="PR">Paraná</option>
+                                    <option value="PE">Pernambuco</option>
+                                    <option value="PI">Piauí</option>
+                                    <option value="RJ">Rio de Janeiro</option>
+                                    <option value="RN">Rio Grande do Norte</option>
+                                    <option value="RS">Rio Grande do Sul</option>
+                                    <option value="RO">Rondônia</option>
+                                    <option value="RR">Roraima</option>
+                                    <option value="SC">Santa Catarina</option>
+                                    <option value="SP">São Paulo</option>
+                                    <option value="SE">Sergipe</option>
+                                    <option value="TO">Tocantins</option>
+                                </select>
+                            </div>
+                            <div class="div-input form-floating mb-3 m-l-10 col-4" style="display: inline-block;">
+                                <input class="form-control" type="text" autocomplete="off" name="cidade" id="cidade"
+                                    placeholder=".">
+                                <label for="" id="" style="width: 400px;">Cidade <span class="obg">*</span></label>
+                            </div>
+                            <div class="div-input form-floating mb-3 m-l-10 col-4" style="display: inline-block;">
+                                <input class="form-control" type="text" autocomplete="off" name="bairro" id="bairro"
+                                    placeholder=".">
+                                <label for="" id="" style="width: 400px;">Bairro <span class="obg">*</span></label>
+                            </div>
+                            <div class="div-input form-floating mb-3 m-l-10 col-7" style="display: inline-block;">
+                                <input class="form-control" type="text" autocomplete="off" name="Endereço" id="endereco"
+                                    placeholder=".">
+                                <label for="" id="" style="width: 400px;">Endereço <span class="obg">*</span></label>
+                            </div>
+                            <div class="div-input form-floating mb-3 m-l-10 col-2" style="display: inline-block;">
+                                <input class="form-control" type="text" autocomplete="off" name="num" id="num"
+                                    placeholder=".">
+                                <label for="" id="" style="width: 400px;">Numero <span class="obg">*</span></label>
+                            </div>
+                            <div class="col-1" style="position: absolute; right: 30px; bottom: 10px;">
+                                <button class="btn btn-success" id="s_btn" onclick="saveData()">Cadastrar</button>
+                            </div>
+                        </div>
+                        <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
+                        <div class="tab-pane row" id="pagina_cadastro">
+                            <div class="justify-content-center">
+                                <h3 title="Informe os tipos de veiculos que sua oficina trabalha">Tipos de veiculos</h3>
+                            </div>
+                            <div class="div-input form-floating mb-3 m-l-10 col-12" style="display: inline-block;">
+                                <div class="col-12">
+                                    <input type="checkbox" class="tveiculo" name="" id=""
+                                        value="@@val@@"><span>@@tipo@@</span><br>
+                                    <input type="checkbox" class="tveiculo" name="" id=""
+                                        value="@@val@@"><span>@@tipo@@</span><br>
+                                    <input type="checkbox" class="tveiculo" name="" id=""
+                                        value="@@val@@"><span>@@tipo@@</span><br>
                                 </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
-                    <!-- Cadastro -->
-                    <!-- Inicio dados -->
-                    <div class="tab-pane row" id="pagina_cadastro">
-                        <button class="btn btn-secondary" id="reload_btn" onclick="window.location.reload();" style="position: absolute; right: 10px; top: 5px; width: 90px; display: none;">Reload</button>
-                        <div class="div-input form-floating mb-3 m-l-10 col-5" style="display: inline-block;">
-                            <input class="form-control" type="text" autocomplete="off" name="razaoSocial"
-                                id="razao_social" placeholder=".">
-                            <label for="" id="" style="width: 400px;">Razão Social <span class="obg">*</span></label>
+                            </div>
                         </div>
-                        <div class="div-input form-floating mb-3 m-l-10 col-4" style="display: inline-block;">
-                            <input class="form-control" type="text" autocomplete="off" name="nomeFantasia"
-                                id="nome_fantasia" placeholder=".">
-                            <label for="" id="" style="width: 400px;">Nome Fantasia <span class="obg">*</span></label>
-                        </div>
-                        <div class="div-input form-floating mb-3 m-l-10 col-3" style="display: inline-block;">
-                            <input class="form-control" type="text" autocomplete="off" name="Telefone1" id="telefone_1"
-                                placeholder="." onchange="celMask('telefone_1')">
-                            <label for="" id="" style="width: 400px;">Telefone 1 <span class="obg">*</span></label>
-                        </div>
-                        <div class="div-input form-floating mb-3 m-l-10 col-3" style="display: inline-block;">
-                            <input class="form-control" type="text" autocomplete="off" name="Telefone2" id="telefone_2"
-                                placeholder="." onchange="celMask('telefone_2')">
-                            <label for="" id="" style="width: 400px;">Telefone 2</label>
-                        </div>
-                        <div class="div-input form-floating mb-3 m-l-10 col-5" style="display: inline-block;">
-                            <input class="form-control" type="text" autocomplete="off" name="email" id="email"
-                                placeholder="." onchange="email_check('email')">
-                            <label for="" id="" style="width: 400px;">Email <span class="obg">*</span></label>
-                        </div>
-                        <div class="div-input form-floating mb-3 m-l-10 col-5" style="display: inline-block;">
-                            <input class="form-control" type="text" autocomplete="off" name="email2" id="email2"
-                                placeholder="." onchange="email_check('email2')">
-                            <label for="" id="" style="width: 400px;">Email 2</label>
-                        </div>
-                        <!-- info adicionais -->
-                        <div class="div-input form-floating mb-3 m-l-10 col-2" style="display: inline-block;">
-                            <input class="form-control" type="number" autocomplete="off" name="qntMaximaVeiculos"
-                                id="qnt_max_veiculos" placeholder=".">
-                            <label for="" id="" style="width: 600px;">Qte Máxima de Veículos <span
-                                    class="obg">*</span></label>
-                        </div>
-                        <!-- Localização -->
-                        <div class="div-input form-floating mb-3 m-l-10 col-1" style="display: inline-block;">
-                            <input class="form-control" type="text" autocomplete="off" name="cep" id="cep"
-                                placeholder="." onchange="pesquisacep(this.val)">
-                            <label for="" id="" style="width: 400px;">CEP <span class="obg">*</span></label>
-                        </div>
-                        <div class="div-input mb-3" style="display: inline-block; width: 200px;">
-                            <select class="form-select" aria-label="Default select example" id="uf">
-                                <option value="" selected>UF</option>
-                                <option value="AC">Acre</option>
-                                <option value="AL">Alagoas</option>
-                                <option value="AP">Amapá</option>
-                                <option value="AM">Amazonas</option>
-                                <option value="BA">Bahia</option>
-                                <option value="CE">Ceará</option>
-                                <option value="DF">Distrito Federal</option>
-                                <option value="ES">Espirito Santo</option>
-                                <option value="GO">Goiás</option>
-                                <option value="MA">Maranhão</option>
-                                <option value="MS">Mato Grosso do Sul</option>
-                                <option value="MT">Mato Grosso</option>
-                                <option value="MG">Minas Gerais</option>
-                                <option value="PA">Pará</option>
-                                <option value="PB">Paraíba</option>
-                                <option value="PR">Paraná</option>
-                                <option value="PE">Pernambuco</option>
-                                <option value="PI">Piauí</option>
-                                <option value="RJ">Rio de Janeiro</option>
-                                <option value="RN">Rio Grande do Norte</option>
-                                <option value="RS">Rio Grande do Sul</option>
-                                <option value="RO">Rondônia</option>
-                                <option value="RR">Roraima</option>
-                                <option value="SC">Santa Catarina</option>
-                                <option value="SP">São Paulo</option>
-                                <option value="SE">Sergipe</option>
-                                <option value="TO">Tocantins</option>
-                            </select>
-                        </div>
-                        <div class="div-input mb-3" style="display: inline-block; width: 200px;">
-                            <select class="form-select" aria-label="Default select example" id="vei_tip">
-                                <option value="" selected>Tipo de Veiculo</option>
-                            </select>
-                        </div>
-                        <div class="div-input form-floating mb-3 m-l-10 col-3" style="display: inline-block;">
-                            <input class="form-control" type="text" autocomplete="off" name="cidade" id="cidade"
-                                placeholder=".">
-                            <label for="" id="" style="width: 400px;">Cidade <span class="obg">*</span></label>
-                        </div>
-                        <div class="div-input form-floating mb-3 m-l-10 col-4" style="display: inline-block;">
-                            <input class="form-control" type="text" autocomplete="off" name="bairro" id="bairro"
-                                placeholder=".">
-                            <label for="" id="" style="width: 400px;">Bairro <span class="obg">*</span></label>
-                        </div>
-                        <div class="div-input form-floating mb-3 m-l-10 col-2" id="data_cadas" style="display: none;">
-                            <input class="form-control" type="text" autocomplete="off" name="dtCad" id="dt_cad"
-                                placeholder=".">
-                            <label for="" id="" style="width: 400px;">Data de Cadastro</label>
-                        </div>
-                        <div class="col-1" id="div_more" style="display: none; padding-top: 17px;"><button class="btn btn-primary"
-                                onclick="moreInfo()" title="Mais informações">Mais +</button></div>
-                        <div class="div-input form-floating mb-3 m-l-10 col-7" style="display: inline-block;">
-                            <input class="form-control" type="text" autocomplete="off" name="Endereço" id="endereco"
-                                placeholder=".">
-                            <label for="" id="" style="width: 400px;">Endereço <span class="obg">*</span></label>
-                        </div>
-                        <div class="div-input form-floating mb-3 m-l-10 col-2" style="display: inline-block;">
-                            <input class="form-control" type="text" autocomplete="off" name="num" id="num"
-                                placeholder=".">
-                            <label for="" id="" style="width: 400px;">Numero <span class="obg">*</span></label>
-                        </div>
-                        <div class="col-1" style="position: absolute; right: 0; bottom: 10px;">
-                            <button class="btn btn-success" id="s_btn" onclick="saveData()">Salvar</button>
-                        </div>
-                    </div>
-                    <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
-                    <!-- Fim cadastro -->
-                    <input type="text" name="" id="cnpj_seg" style="display: none;">
-                    <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
-                    <!-- Inicio Modal-->
-                    <div class="col-12">
-                        <div class="modal" id="modal_1"
-                            style="z-index: 9999; background-color: rgba(0, 0, 0, 0.5); display: block;">
+                        <!-- Fim cadastro -->
+
+                        <input type="text" name="" id="cnpj_seg" style="display: none;">
+                        <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
+                        <!-- Inicio Modal-->
+                        <div class="modal" id="modal_1" style="z-index: 9999; background-color: rgba(0, 0, 0, 0.5); ">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h4 class="modal-title" id="defaultModalLabel">Cadastro de Oficina</h4>
                                     </div>
-                                    <div class="">
-                                        <div class="col-12 justify-content-center"><label for="">CNPJ</label></div>
-                                        <div class="col-12 justify-content-center m-b-10">
-                                            <input type="text"
-                                                style="width: 90%; display: block; border: solid 1px lightgray; height: 30px;"
-                                                id="cnpj_modal" autocomplete="off">
-                                        </div>
-                                        <div class="col-12">
-                                            <div style="float: right; margin-right: 25px;">
-                                                <button class="btn btn-success" onclick="consultaCNPJ()">Buscar</button>
-                                            </div>
+                                    <div class="col-12 justify-content-center"><label for="">CNPJ</label></div>
+                                    <div class="col-12 justify-content-center m-b-10">
+                                        <input type="text"
+                                            style="width: 90%; display: block; border: solid 1px lightgray; height: 30px;"
+                                            id="cnpj_modal" autocomplete="off">
+                                    </div>
+                                    <div class="col-12">
+                                        <div style="float: right; margin-right: 25px;">
+                                            <button class="btn btn-success" onclick="consultaCNPJ()">Buscar</button>
                                         </div>
                                     </div>
-                                    <div class="" style="margin: 10px; padding: 5px; display: inline-block;">
+                                    <div style="margin: 10px; padding: 5px; display: inline-block;">
                                         <div class="col-12">
                                             <label for="">Razão Social</label>
                                             <input type="text" id="rz_social_m" style="width: 100%;" disabled>
@@ -320,31 +349,6 @@
                                                 disabled="disabled" onclick="obterDados()">Proximo</button>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal" id="modal_2" style="z-index: 9999; background-color: rgba(0, 0, 0, 0.5);">
-                    <div class="row">
-                        <div class="justify-content-center" style="margin-top: 25px;">
-                            <div class="col-10">
-                                <div class="card" style="padding: 10px;">
-                                    <div class="div-input form-floating mb-3 m-l-10 col-7"
-                                        style="display: inline-block;">
-                                        <input class="form-control" type="text" autocomplete="off" name="CNPJ"
-                                            id="cnpj_m_2" placeholder="." disabled>
-                                        <label for="" id="" style="width: 400px;">CNPJ</label>
-                                    </div>
-                                    <div class="col-7 m-l-10" style="display: inline-block;">
-                                        <input class="" type="checkbox" autocomplete="off" name="desabilitada"
-                                            id="desab" placeholder="." style="display: inline-block;" disabled>
-                                        <label for="" id=""
-                                            style="width: 400px; display: inline-block; padding: 0;">Desabilitada</label>
-                                    </div>
-                                    <button class="btn btn-danger" style="width: 90px; position: absolute; right: 10px;"
-                                        onclick="fechaModa()">Fechar</button>
                                 </div>
                             </div>
                         </div>
@@ -407,8 +411,9 @@
                     }
 
                     function mphone(v) {
-                        var r = v.replace(/\D/g, "");
+                        let r = v.replace(/\D/g, "");
                         r = r.replace(/^0/, "");
+
                         if (r.length > 10) {
                             r = r.replace(/^(\d\d)(\d{5})(\d{4}).*/, "($1) $2-$3");
                         } else if (r.length > 5) {
@@ -421,20 +426,29 @@
                         return r;
                     }
 
-                    function maskaraCPFCNPJ(el) {
-                        var tamanho = el.value.replace('.', '').replace('.', '').replace('-', '').replace('/', '').length;
-                        if (tamanho > 11) {
-                            j(el).inputmask("99.999.999/9999-99", { "placeholder": "" });
+                    function validaCel(id) {
+                        let t = document.getElementById(id);
+                        let v = t.value;
+                        let r = v.replace(/\D/g, "");
+                        r = r.replace(/^0/, "");
+
+                        if (r.length > 10) {
+                            r = r.replace(/^(\d\d)(\d{5})(\d{4}).*/, "($1) $2-$3");
+                        } else if (r.length > 5) {
+                            r = r.replace(/^(\d\d)(\d{4})(\d{0,4}).*/, "($1) $2-$3");
+                        } else if (r.length > 2) {
+                            r = r.replace(/^(\d\d)(\d{0,5})/, "($1) $2");
                         } else {
-                            j(el).inputmask("999.999.999-99[9]", { "placeholder": "" });
+                            r = ''
                         }
-                    };
+                        t.value = r;
+                    }
                 </script>
                 <script>
                     var tipo;
 
                     window.onload = () => {
-                        alterTab(0);
+                        alterTab(1);
                         parent.ebfFlowExecute('Novo Cadastro de Oficinas - retornar tipo de veiculos', null);
                     }
 
@@ -539,7 +553,6 @@
                         resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
                         if (resultado != digitos.charAt(0))
                             return false;
-
                         tamanho = tamanho + 1;
                         numeros = cnpj.substring(0, tamanho);
                         soma = 0;
@@ -552,11 +565,17 @@
                         resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
                         if (resultado != digitos.charAt(1))
                             return false;
-
                         return true;
-
                     }
-
+                    function obterTipoVeiculo() {
+                        let t = document.querySelectorAll('.tveiculo').length
+                        let lista = new Array;
+                        for (let i = 0; i < t; i++) {
+                            if (document.querySelectorAll('.tveiculo')[i].checked)
+                                lista[i] = document.querySelectorAll('.tveiculo')[i].value;
+                        }
+                        return lista;
+                    }
                     function consultaCNPJ() {
                         let cnpj = document.getElementById('cnpj_modal').value
                         if (validarCNPJ(document.getElementById('cnpj_modal').value)) {
@@ -648,6 +667,8 @@
                         document.getElementById('bairro').value = document.getElementById('bair_m').value;
                         document.getElementById('cidade').value = document.getElementById('cid_m').value;
                         document.getElementById('uf').value = document.getElementById('uf_m').value;
+                        document.getElementById('email').value = email_j;
+                        document.getElementById('telefone_1').value = tel_j;
                         /*  */
                         document.getElementById('razao_social').setAttribute('disabled', 'disabled')
                         document.getElementById('nome_fantasia').setAttribute('disabled', 'disabled')
@@ -660,14 +681,6 @@
                         if (nume != undefined && nume != null) {
                             document.getElementById('num').value = nume
                             document.getElementById('num').setAttribute('disabled', 'disabled')
-                        }
-                        if (tel_j != undefined && tel_j != null && tel_j.replace(/ /g, '') != '') {
-                            document.getElementById('telefone_1').value = tel_j;
-                            document.getElementById('telefone_1').setAttribute('disabled', 'disabled');
-                        }
-                        if (email_j != undefined && email_j != null && email_j.replace(/ /g, '') != '') {
-                            document.getElementById('email').value = email_j;
-                            document.getElementById('email').setAttribute('disabled', 'disabled')
                         }
                         /*  */
                         document.getElementById('modal_1').style.display = 'none';
@@ -700,6 +713,19 @@
                         }
                         if (!(emailsTest()))
                             lista[0] = 'protocol0'
+                        let tipoVei = obterTipoVeiculo();
+                        document.getElementById('pagina_tip').style.color = 'lightgray'
+                        if (!(tipoVei.length > 0)) {
+                            if (lista[0] != 'protocol0') {
+                                alterTab(1);
+                                lista[0] = 'protocol0'
+                                parent.ebfFlowExecute('Geral - Sweet Alert Notificar', parent.ebfListParamsCreate(0, 'Informe os tipos de veiculos que sua oficina trabalha'));
+                            }
+                            else {
+                                document.getElementById('pagina_tip').style.color = 'red'
+                            }
+                        }
+
                         return lista;
                     }
 
