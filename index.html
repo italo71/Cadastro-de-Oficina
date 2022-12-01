@@ -164,7 +164,7 @@
                                         Serviços
                                     </a>
                                     <div style="display: inline-block; position: relative; top: 4px;">
-                                        <i class="material-icons" style="font-size: 14pt;">how_to_reg</i>
+                                        <i class="material-icons" style="font-size: 14pt;">build</i>
                                     </div>
                                 </li>
                             </ul>
@@ -281,11 +281,7 @@
                                 <h3 title="Informe os tipos de veiculos que sua oficina trabalha">Tipos de veiculos</h3>
                             </div>
                             <div class="div-input form-floating mb-3 m-l-10 col-12" style="display: inline-block;">
-                                <div class="col-12">
-                                    <input type="checkbox" class="tveiculo" name="" id=""
-                                        value="@@val@@"><span>@@tipo@@</span><br>
-                                    <input type="checkbox" class="tveiculo" name="" id=""
-                                        value="@@val@@"><span>@@tipo@@</span><br>
+                                <div class="col-12" id="tips_vei">
                                     <input type="checkbox" class="tveiculo" name="" id=""
                                         value="@@val@@"><span>@@tipo@@</span><br>
                                 </div>
@@ -296,7 +292,7 @@
                         <input type="text" name="" id="cnpj_seg" style="display: none;">
                         <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
                         <!-- Inicio Modal-->
-                        <div class="modal" id="modal_1" style="z-index: 9999; background-color: rgba(0, 0, 0, 0.5); ">
+                        <div class="modal" id="modal_1" style="z-index: 9999; background-color: rgba(0, 0, 0, 0.5); display: block;">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -448,7 +444,7 @@
                     var tipo;
 
                     window.onload = () => {
-                        alterTab(1);
+                        alterTab(0);
                         parent.ebfFlowExecute('Novo Cadastro de Oficinas - retornar tipo de veiculos', null);
                     }
 
@@ -686,7 +682,7 @@
                         document.getElementById('modal_1').style.display = 'none';
                         /*  */
                     }
-                    let ids_inp = ['telefone_1', 'qnt_max_veiculos', 'email', 'cep', 'uf', 'cidade', 'bairro', 'endereco', 'num', 'vei_tip'];
+                    let ids_inp = ['telefone_1', 'qnt_max_veiculos', 'email', 'cep', 'uf', 'cidade', 'bairro', 'endereco', 'num'];
                     function oData() {
                         let tel_1_ = document.getElementById('telefone_1').value;
                         let tel_2_ = document.getElementById('telefone_2').value;
@@ -699,11 +695,10 @@
                         let bairro_ = document.getElementById('bairro').value;
                         let ende_ = document.getElementById('endereco').value;
                         let numero_ = document.getElementById('num').value;
-                        let tipo_vei = document.getElementById('vei_tip').value;
                         cep_ = cep_.replace(/\s/g, '');
                         cep_ = cep_.replace(/-/g, '');
                         cep_ = cep_.replace(/\./g, '');
-                        let lista = [tel_1_, qte_max_vei_, email_1_, cep_, uf_, cidade_, bairro_, ende_, numero_, tel_2_, email_2_, tipo_vei];
+                        let lista = [tel_1_, qte_max_vei_, email_1_, cep_, uf_, cidade_, bairro_, ende_, numero_, tel_2_, email_2_];
                         for (let i = 0; i < ids_inp.length; i++) {
                             document.getElementById(ids_inp[i]).style.borderColor = 'lightgray'
                             if (document.getElementById(ids_inp[i]).value == null || document.getElementById(ids_inp[i]).value == undefined || document.getElementById(ids_inp[i]).value.replace(/\s/g, '') == '') {
