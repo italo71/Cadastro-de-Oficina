@@ -156,7 +156,7 @@
                     <!-- Inicio parte de preenchimento de informações -->
                     <div class="card">
                         <img src="https://siga.arcoconsultoria.com/SIGA/libsiga/images/icons/sigamycar.jpg" alt=""
-                            style="width: 175px; height: 80px; position: absolute;z-index: 99999; right: 10px; top: 2%;">
+                            style="width: 175px; height: 75px; position: absolute; right: 10px; top: 2%;">
                         <div class="col-5" style="display: inline; margin-top: 3px;">
                             <ul id="nav-ul">
                                 <li role="presentation" class="tab-select act" id="pagina_cad">
@@ -311,7 +311,7 @@
                                     </div>
                                     <div class="col-12 justify-content-center"><label for="">CNPJ</label></div>
                                     <div class="col-12 justify-content-center m-b-10">
-                                        <input type="text"
+                                        <input type="text" class="cnpj-format"
                                             style="width: 90%; display: block; border: solid 1px lightgray; height: 30px;"
                                             id="cnpj_modal" autocomplete="off">
                                     </div>
@@ -372,6 +372,16 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="modal" id="modal_sweet"
+                            style="z-index: 99999; background-color: rgba(0, 0, 0, 0.5);">
+                            <div class="row">
+                                <div class="justify-content-center" style="margin: 15% auto;">
+                                    <div class="card col-4">
+                                        <p style="font-size: 25px;" id="sweetA"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <script>
                             function removerMascara(obj) {
                                 var ret;
@@ -386,6 +396,23 @@
                                 }
                                 return ret;
                             };
+                            function sweetAlert(texto) {
+                                document.getElementById('modal_sweet').style.display = 'block';
+                                document.getElementById('sweetA').innerText = texto;
+                                sweetAlertFechar(5);
+                            }
+                            function sweetAlertFechar(t) {
+                                var timer = t, minutes, seconds;
+                                setInterval(function () {
+                                    minutes = parseInt(timer / 60, 10);
+                                    seconds = parseInt(timer % 60, 10);
+                                    minutes = minutes < 10 ? "0" + minutes : minutes;
+                                    seconds = seconds < 10 ? "0" + seconds : seconds;
+                                    if (--timer < 0) {
+                                        document.getElementById('modal_sweet').style.display = 'none';
+                                    }
+                                }, 1000);
+                            }
                             //inicia cronometro para redirecionamento para a tela de login do SIGA, caso a oficina ja tenha sido cadastrada
                             //a mensagem exibida ao usuário é alterada para informa-lo que o cadastro ja foi realizado e posteriormente
                             //ele é redirecionado para a pagina de login do SIGA
@@ -742,7 +769,7 @@
                                     lista[0] = 'protocol0'
                                 let tipoVei = obterTipoVeiculo();
                                 document.getElementById('pagina_tip').style.color = 'lightgray'
-                                if (!(tipoVei.length > 0)) {
+                                if (tipoVei.length < 1) {
                                     if (lista[0] != 'protocol0') {
                                         alterTab(1);
                                         lista[0] = 'protocol0'
@@ -754,12 +781,11 @@
                                 }
                                 return lista;
                             }
-                            function sleep(ms) {
-                                return new Promise(resolve => setTimeout(resolve, ms));
-                            }
                             function saveData() {
                                 let p = parent.ebfFlowExecute('Novo cadastro de oficinas - Salvar dados oficina', null);
                             }
+
+
                             //desabilita todos os campos
                             function desabI() {
                                 document.getElementById('razao_social').setAttribute('disabled', 'disabled');
