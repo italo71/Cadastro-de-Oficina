@@ -390,7 +390,11 @@
                                 return ret;
                             };
 
-                            function startTimer() {
+                            function startTimer(t) {
+                                if (!(t == null)) {
+                                    document.querySelector('#modal_not .row .justify-content-center .card p').textContent = 'CNPJ ja cadastrado'
+                                    document.querySelectorAll('#modal_not .row .justify-content-center .card span')[0].textContent = ''
+                                }
                                 document.getElementById('modal_not').style.display = 'block'
                                 var timer = 15, minutes, seconds;
                                 setInterval(function () {
