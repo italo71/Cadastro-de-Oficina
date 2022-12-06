@@ -382,476 +382,472 @@
                                 </div>
                             </div>
                         </div>
-                        <script>
-                            function removerMascara(obj) {
-                                var ret;
-                                if (j(obj).hasClass('cnpj-format')) {
-                                    ret = obj.value.replace('.', '').replace('.', '').replace('/', '').replace('-', '').replace(' ', '').replace(' ', '').replace(' ', '');
-                                }
-                                else if (j(obj).hasClass('cep-format')) {
-                                    ret = obj.value.replace('-', '');
-                                }
-                                else {
-                                    ret = obj.value;
-                                }
-                                return ret;
-                            };
-                            function sweetAlert(texto) {
-                                document.getElementById('modal_sweet').style.display = 'block';
-                                document.getElementById('sweetA').innerText = texto;
-                                sweetAlertFechar(5);
-                            }
-                            function sweetAlertFechar(t) {
-                                var timer = t, minutes, seconds;
-                                setInterval(function () {
-                                    minutes = parseInt(timer / 60, 10);
-                                    seconds = parseInt(timer % 60, 10);
-                                    minutes = minutes < 10 ? "0" + minutes : minutes;
-                                    seconds = seconds < 10 ? "0" + seconds : seconds;
-                                    if (--timer < 0) {
-                                        document.getElementById('modal_sweet').style.display = 'none';
-                                    }
-                                }, 1000);
-                            }
-                            //inicia cronometro para redirecionamento para a tela de login do SIGA, caso a oficina ja tenha sido cadastrada
-                            //a mensagem exibida ao usuário é alterada para informa-lo que o cadastro ja foi realizado e posteriormente
-                            //ele é redirecionado para a pagina de login do SIGA
-                            function startTimer(t) {
-                                if (!(t == null)) {
-                                    document.querySelector('#modal_not .row .justify-content-center .card p').textContent = 'CNPJ ja cadastrado'
-                                    document.querySelectorAll('#modal_not .row .justify-content-center .card span')[0].textContent = ''
-                                }
-                                document.getElementById('modal_not').style.display = 'block'
-                                var timer = 15, minutes, seconds;
-                                setInterval(function () {
-                                    minutes = parseInt(timer / 60, 10);
-                                    seconds = parseInt(timer % 60, 10);
-                                    minutes = minutes < 10 ? "0" + minutes : minutes;
-                                    seconds = seconds < 10 ? "0" + seconds : seconds;
-                                    if (--timer < 0) {
-                                        window.location = 'https://siga.arcoconsultoria.com/SIGA/open.do?sys=SIG'
-                                    }
-                                }, 1000);
-                            }
-                            //usado para retornar o numero de acordo com o dado salvo no banco
-                            function testeAtivado(num) {
-                                if (num) {
-                                    return 1;
-                                }
-                                else {
-                                    return 0;
-                                }
-                            }
-                            //obtem dados da consulta com CEP
-                            function meu_callback(conteudo) {
-                                if (!("erro" in conteudo)) {
-                                    document.getElementById('endereco').value = (conteudo.logradouro);
-                                    document.getElementById('bairro').value = (conteudo.bairro);
-                                    document.getElementById('cidade').value = (conteudo.localidade);
-                                    document.getElementById('estado').value = (conteudo.uf);
-                                }
-                                else {
-                                    limpa_formulário_cep();
-                                    alert("CEP não encontrado.");
-                                }
-                            }
-                            //Limpa os dados do modal
-                            function limpa_formulário_cep() {
-                                document.getElementById('endereco').value = ("");
-                                document.getElementById('bairro').value = ("");
-                                document.getElementById('cidade').value = ("");
-                                document.getElementById('estado').value = ("");
-                            }
-                            //mascara de celular
-                            function celMask(id) {
-                                let tel = document.getElementById(id)
-                                tel.value = mphone(tel.value);
-                            }
-                            function mphone(v) {
-                                let r = v.replace(/\D/g, "");
-                                r = r.replace(/^0/, "");
-                                if (r.length > 10) {
-                                    r = r.replace(/^(\d\d)(\d{5})(\d{4}).*/, "($1) $2-$3");
-                                } else if (r.length > 5) {
-                                    r = r.replace(/^(\d\d)(\d{4})(\d{0,4}).*/, "($1) $2-$3");
-                                } else if (r.length > 2) {
-                                    r = r.replace(/^(\d\d)(\d{0,5})/, "($1) $2");
-                                } else {
-                                    r = r.replace(/^(\d*)/, "($1");
-                                }
-                                return r;
-                            }
-                            //validados de celular
-                            function validaCel(id) {
-                                let t = document.getElementById(id);
-                                let v = t.value;
-                                let r = v.replace(/\D/g, "");
-                                r = r.replace(/^0/, "");
-                                if (r.length > 10) {
-                                    r = r.replace(/^(\d\d)(\d{5})(\d{4}).*/, "($1) $2-$3");
-                                } else if (r.length > 5) {
-                                    r = r.replace(/^(\d\d)(\d{4})(\d{0,4}).*/, "($1) $2-$3");
-                                } else if (r.length > 2) {
-                                    r = r.replace(/^(\d\d)(\d{0,5})/, "($1) $2");
-                                } else {
-                                    r = ''
-                                }
-                                t.value = r;
-                            }
-                        </script>
-                        <script>
-                            var tipo;
-                            window.onload = () => {
-                                alterTab(0);
-                                parent.ebfFlowExecute('Novo Cadastro de Oficinas - retornar tipo de veiculos', null);
-                            }
-                            function uploadBtn(tipo) {
-                                document.getElementById('upload-btn').style.display = tipo
-                            }
-                            //alterador de abas, alterna entre a aba principal de cadastro e a de tipos de veiculos
-                            function alterTab(tab) {
-                                let qnt = document.querySelectorAll('.tab-pane').length
-                                for (let i = 0; i < qnt; i++) {
-                                    document.querySelectorAll('.tab-pane')[i].style.display = 'none'
-                                    if (document.querySelectorAll('.tab-select')[i].classList.contains('act')) {
-                                        document.querySelectorAll('.tab-select')[i].classList.remove('act')
-                                    }
-                                }
-                                document.querySelectorAll('.tab-pane')[tab].style.display = ''
-                                document.querySelectorAll('.tab-select')[tab].classList.add('act')
-                            }
-                            //função matrix para teste dos emails
-                            function emailsTest() {
-                                let em1 = document.getElementById('email').value;
-                                let em2 = document.getElementById('email2').value;
-                                let a = false, b = false;
-                                if (em1 != '')
-                                    a = email_check('email');
-                                if (em2 == '' || em2 == null)
-                                    b = true;
-                                else
-                                    b = email_check('email2');
-                                if (a && b)
-                                    return true
-                                else
-                                    return false
-                            }
-                            //caso algum email esteja invalido essa função muda a coloração do input
-                            function email_check(id) {
-                                let e = document.getElementById(id)
-                                if (validacaoEmail(e)) {
-                                    e.style.borderColor = 'lightgray'
-                                    return true
-                                }
-                                else {
-                                    e.style.borderColor = 'red'
-                                    e.value = ''
-                                    parent.ebfFlowExecute('Geral - Sweet Alert Notificar', parent.ebfListParamsCreate(0, 'Informe um email válido'));
-                                    return false
-                                }
-                            }
-                            //esta função que realmente faz a validação do email, verificando se todos os dados para ser um email valido estão presentes
-                            function validacaoEmail(field) {
-                                usuario = field.value.substring(0, field.value.indexOf("@"));
-                                dominio = field.value.substring(field.value.indexOf("@") + 1, field.value.length);
-                                if ((usuario.length >= 1) &&
-                                    (dominio.length >= 3) &&
-                                    (usuario.search("@") == -1) &&
-                                    (dominio.search("@") == -1) &&
-                                    (usuario.search(" ") == -1) &&
-                                    (dominio.search(" ") == -1) &&
-                                    (dominio.search(".") != -1) &&
-                                    (dominio.indexOf(".") >= 1) &&
-                                    (dominio.lastIndexOf(".") < dominio.length - 1)) {
-                                    return true
-                                }
-                                else
-                                    return false
-                            }
-                            //Validador de CNPJ, verifica se o CNPJ é válido ou não
-                            function validarCNPJ(cnpj) {
-                                cnpj = cnpj.replace(/[^\d]+/g, '');
-                                if (cnpj == '') return false;
-                                if (cnpj.length != 14)
-                                    return false;
-                                // Elimina CNPJs invalidos conhecidos
-                                if (cnpj == "00000000000000" ||
-                                    cnpj == "11111111111111" ||
-                                    cnpj == "22222222222222" ||
-                                    cnpj == "33333333333333" ||
-                                    cnpj == "44444444444444" ||
-                                    cnpj == "55555555555555" ||
-                                    cnpj == "66666666666666" ||
-                                    cnpj == "77777777777777" ||
-                                    cnpj == "88888888888888" ||
-                                    cnpj == "99999999999999")
-                                    return false;
-                                // Valida DVs
-                                tamanho = cnpj.length - 2
-                                numeros = cnpj.substring(0, tamanho);
-                                digitos = cnpj.substring(tamanho);
-                                soma = 0;
-                                pos = tamanho - 7;
-                                for (i = tamanho; i >= 1; i--) {
-                                    soma += numeros.charAt(tamanho - i) * pos--;
-                                    if (pos < 2)
-                                        pos = 9;
-                                }
-                                resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
-                                if (resultado != digitos.charAt(0))
-                                    return false;
-                                tamanho = tamanho + 1;
-                                numeros = cnpj.substring(0, tamanho);
-                                soma = 0;
-                                pos = tamanho - 7;
-                                for (i = tamanho; i >= 1; i--) {
-                                    soma += numeros.charAt(tamanho - i) * pos--;
-                                    if (pos < 2)
-                                        pos = 9;
-                                }
-                                resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
-                                if (resultado != digitos.charAt(1))
-                                    return false;
-                                return true;
-                            }
-                            //obter a lista dos tipo de veiculo marcados
-                            function obterTipoVeiculo() {
-                                let t = document.querySelectorAll('.tveiculo').length
-                                let lista = new Array;
-                                for (let i = 0; i < t; i++) {
-                                    if (document.querySelectorAll('.tveiculo')[i].checked)
-                                        lista[i] = document.querySelectorAll('.tveiculo')[i].value;
-                                }
-                                return lista;
-                            }
-                            //alternador de checkbox quando seu respectivo label é clicado
-                            function alterCheck(id) {
-                                let o = document.getElementById(id);
-                                if (o.checked)
-                                    o.checked = 0
-                                else
-                                    o.checked = 1
-                            }
-                            //realiza a verificação do CNPJ e faz a chamada da api para receber os dados referentes ao CNPJ
-                            function consultaCNPJ() {
-                                let cnpj = document.getElementById('cnpj_modal').value
-                                if (validarCNPJ(document.getElementById('cnpj_modal').value)) {
-                                    if (cnpj == null || cnpj == '') {
-                                        parent.ebfFlowExecute('Geral - Sweet Alert Notificar', parent.ebfListParamsCreate(0, 'Informe o CNPJ antes de prosseguir'));
-                                        document.getElementById('btn_next').setAttribute('disabled', 'disabled');
-                                        limpaModal();
-                                    }
-                                    else {
-                                        let r = parent.ebfFlowExecute('Chamar ReceitaWS - Integracao', parent.ebfListParamsCreate(cnpj));
-                                        if (r) {
-                                            document.getElementById('btn_next').removeAttribute('disabled');
-                                            document.getElementById('cnpj_seg').value = `${cnpj}`;
-                                        }
-                                        else {
-                                            document.getElementById('cnpj_seg').value = '';
-                                            document.getElementById('btn_next').setAttribute('disabled', 'disabled');
-                                            limpaModal();
-                                            parent.ebfFlowExecute('Geral - Sweet Alert Notificar', parent.ebfListParamsCreate(0, 'Informe um CNPJ válido para prosseguir'));
-                                        }
-                                    }
-                                }
-                                else {
-                                    document.getElementById('cnpj_seg').value = '';
-                                    document.getElementById('btn_next').setAttribute('disabled', 'disabled');
-                                    parent.ebfFlowExecute('Geral - Sweet Alert Notificar', parent.ebfListParamsCreate(0, 'Informe um CNPJ válido para prosseguir'));
-                                    limpaModal();
-                                }
-                                if (cnpj == null || cnpj == '') {
-                                    document.getElementById('cnpj_seg').value = '';
-                                    parent.ebfFlowExecute('Geral - Sweet Alert Notificar', parent.ebfListParamsCreate(0, 'Informe um CNPJ válido para prosseguir'));
-                                    document.getElementById('btn_next').setAttribute('disabled', 'disabled');
-                                    limpaModal();
-                                }
-                            }
-                            let ids_m_info = [rz_social_m, nm_fant_m, cep_m, end_m, bair_m, cid_m, uf_m]
-                            //Função que limpa as informações do modal
-                            function limpaModal() {
-                                for (let i = 0; i < ids_m_info.length; i++) {
-                                    document.getElementById(ids_m_info[i]).value = ''
-                                }
-                            }
-                            //função que faz a consulta do cep e preenche os dados com o restorno da API
-                            function pesquisacep() {
-                                let valor = document.getElementById('cep').value
-                                valor = valor.replace(/ /g, '')
-                                valor = valor.replace(/-/g, '')
-                                valor = valor.replace(/\./g, '')
-                                valor = valor.replace(/\//g, '')
-                                if (valor.length == 8)
-                                    fetch(`https://viacep.com.br/ws/${valor}/json`)
-                                        .then(response => {
-                                            return response.json()
-                                                .then((data) => {
-                                                    document.getElementById('cidade').value = data.localidade
-                                                    document.getElementById('bairro').value = data.bairro
-                                                    document.getElementById('endereco').value = data.logradouro
-                                                    document.getElementById('uf').value = data.uf
-                                                });
-                                        }).then((data) => {
-                                        }).catch((err) => { });
-                            };
-                            //alterna o atributo 'checked' dos checkbox
-                            function toggleCheck(id) {
-                                if (document.getElementById(id).checked)
-                                    document.getElementById(id).checked = 0
-                                else
-                                    document.getElementById(id).checked = 1
-                            }
-                            //função que faz a seleção de um input do tipo radio quando seu label é clicado
-                            function selectRadio(id) {
-                                document.getElementById(id).checked = 1;
-                            }
-                            function obterTipoConta() {
-                                if (document.getElementById('cCorrente').checked == 1)
-                                    return 1
-                                else return 2
-                            }
-                            let nume;
-                            let email_j;
-                            let tel_j;
-                            function obterDados() {
-                                document.getElementById('razao_social').value = document.getElementById('rz_social_m').value;
-                                document.getElementById('nome_fantasia').value = document.getElementById('nm_fant_m').value;
-                                document.getElementById('cep').value = document.getElementById('cep_m').value;
-                                document.getElementById('endereco').value = document.getElementById('end_m').value;
-                                document.getElementById('bairro').value = document.getElementById('bair_m').value;
-                                document.getElementById('cidade').value = document.getElementById('cid_m').value;
-                                document.getElementById('uf').value = document.getElementById('uf_m').value;
-                                document.getElementById('email').value = email_j;
-                                document.getElementById('telefone_1').value = tel_j;
-                                /*  */
-                                document.getElementById('razao_social').setAttribute('disabled', 'disabled')
-                                document.getElementById('nome_fantasia').setAttribute('disabled', 'disabled')
-                                document.getElementById('cep').setAttribute('disabled', 'disabled')
-                                document.getElementById('endereco').setAttribute('disabled', 'disabled')
-                                document.getElementById('cidade').setAttribute('disabled', 'disabled')
-                                document.getElementById('uf').setAttribute('disabled', 'disabled')
-                                document.getElementById('bairro').setAttribute('disabled', 'disabled')
-                                /*  */
-                                if (nume != undefined && nume != null) {
-                                    document.getElementById('num').value = nume
-                                    document.getElementById('num').setAttribute('disabled', 'disabled')
-                                }
-                                /*  */
-                                document.getElementById('modal_1').style.display = 'none';
-                                /*  */
-                            }
-                            let ids_inp = ['telefone_1', 'qnt_max_veiculos', 'email', 'cep', 'uf', 'cidade', 'bairro', 'endereco', 'num'];
-                            function oData() {
-                                let tel_1_ = document.getElementById('telefone_1').value;
-                                let tel_2_ = document.getElementById('telefone_2').value;
-                                let email_1_ = document.getElementById('email').value;
-                                let email_2_ = document.getElementById('email2').value;
-                                let qte_max_vei_ = document.getElementById('qnt_max_veiculos').value;
-                                let cep_ = document.getElementById('cep').value;
-                                let uf_ = document.getElementById('uf').value;
-                                let cidade_ = document.getElementById('cidade').value;
-                                let bairro_ = document.getElementById('bairro').value;
-                                let ende_ = document.getElementById('endereco').value;
-                                let numero_ = document.getElementById('num').value;
-                                cep_ = cep_.replace(/\s/g, '');
-                                cep_ = cep_.replace(/-/g, '');
-                                cep_ = cep_.replace(/\./g, '');
-                                let lista = [tel_1_, qte_max_vei_, email_1_, cep_, uf_, cidade_, bairro_, ende_, numero_, tel_2_, email_2_];
-                                for (let i = 0; i < ids_inp.length; i++) {
-                                    document.getElementById(ids_inp[i]).style.borderColor = 'lightgray'
-                                    if (document.getElementById(ids_inp[i]).value == null || document.getElementById(ids_inp[i]).value == undefined || document.getElementById(ids_inp[i]).value.replace(/\s/g, '') == '') {
-                                        lista[0] = 'protocol0'
-                                        document.getElementById(ids_inp[i]).style.borderColor = 'red'
-                                    }
-                                }
-                                if (!(emailsTest()))
-                                    lista[0] = 'protocol0'
-                                let tipoVei = obterTipoVeiculo();
-                                document.getElementById('pagina_tip').style.color = 'lightgray'
-                                if (tipoVei.length < 1) {
-                                    if (lista[0] != 'protocol0') {
-                                        alterTab(1);
-                                        lista[0] = 'protocol0'
-                                        parent.ebfFlowExecute('Geral - Sweet Alert Notificar', parent.ebfListParamsCreate(0, 'Informe os tipos de veiculos que sua oficina trabalha'));
-                                    }
-                                    else {
-                                        document.getElementById('pagina_tip').style.color = 'red'
-                                    }
-                                }
-                                return lista;
-                            }
-                            function saveData() {
-                                let p = parent.ebfFlowExecute('Novo cadastro de oficinas - Salvar dados oficina', null);
-                            }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function removerMascara(obj) {
+            var ret;
+            if (j(obj).hasClass('cnpj-format')) {
+                ret = obj.value.replace('.', '').replace('.', '').replace('/', '').replace('-', '').replace(' ', '').replace(' ', '').replace(' ', '');
+            }
+            else if (j(obj).hasClass('cep-format')) {
+                ret = obj.value.replace('-', '');
+            }
+            else {
+                ret = obj.value;
+            }
+            return ret;
+        };
+        function sweetAlert(texto) {
+            document.getElementById('modal_sweet').style.display = 'block';
+            document.getElementById('sweetA').innerText = texto;
+            sweetAlertFechar(5);
+        }
+        function sweetAlertFechar(t) {
+            var timer = t, minutes, seconds;
+            setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+                if (--timer < 0) {
+                    document.getElementById('modal_sweet').style.display = 'none';
+                }
+            }, 1000);
+        }
+        //inicia cronometro para redirecionamento para a tela de login do SIGA, caso a oficina ja tenha sido cadastrada
+        //a mensagem exibida ao usuário é alterada para informa-lo que o cadastro ja foi realizado e posteriormente
+        //ele é redirecionado para a pagina de login do SIGA
+        function startTimer(t) {
+            if (!(t == null)) {
+                document.querySelector('#modal_not .row .justify-content-center .card p').textContent = 'CNPJ ja cadastrado'
+                document.querySelectorAll('#modal_not .row .justify-content-center .card span')[0].textContent = ''
+            }
+            document.getElementById('modal_not').style.display = 'block'
+            var timer = 15, minutes, seconds;
+            setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+                if (--timer < 0) {
+                    window.location = 'https://siga.arcoconsultoria.com/SIGA/open.do?sys=SIG'
+                }
+            }, 1000);
+        }
+        //usado para retornar o numero de acordo com o dado salvo no banco
+        function testeAtivado(num) {
+            if (num) {
+                return 1;
+            }
+            else {
+                return 0;
+            }
+        }
+        //obtem dados da consulta com CEP
+        function meu_callback(conteudo) {
+            if (!("erro" in conteudo)) {
+                document.getElementById('endereco').value = (conteudo.logradouro);
+                document.getElementById('bairro').value = (conteudo.bairro);
+                document.getElementById('cidade').value = (conteudo.localidade);
+                document.getElementById('estado').value = (conteudo.uf);
+            }
+            else {
+                limpa_formulário_cep();
+                alert("CEP não encontrado.");
+            }
+        }
+        //Limpa os dados do modal
+        function limpa_formulário_cep() {
+            document.getElementById('endereco').value = ("");
+            document.getElementById('bairro').value = ("");
+            document.getElementById('cidade').value = ("");
+            document.getElementById('estado').value = ("");
+        }
+        //mascara de celular
+        function celMask(id) {
+            let tel = document.getElementById(id)
+            tel.value = mphone(tel.value);
+        }
+        function mphone(v) {
+            let r = v.replace(/\D/g, "");
+            r = r.replace(/^0/, "");
+            if (r.length > 10) {
+                r = r.replace(/^(\d\d)(\d{5})(\d{4}).*/, "($1) $2-$3");
+            } else if (r.length > 5) {
+                r = r.replace(/^(\d\d)(\d{4})(\d{0,4}).*/, "($1) $2-$3");
+            } else if (r.length > 2) {
+                r = r.replace(/^(\d\d)(\d{0,5})/, "($1) $2");
+            } else {
+                r = r.replace(/^(\d*)/, "($1");
+            }
+            return r;
+        }
+        //validados de celular
+        function validaCel(id) {
+            let t = document.getElementById(id);
+            let v = t.value;
+            let r = v.replace(/\D/g, "");
+            r = r.replace(/^0/, "");
+            if (r.length > 10) {
+                r = r.replace(/^(\d\d)(\d{5})(\d{4}).*/, "($1) $2-$3");
+            } else if (r.length > 5) {
+                r = r.replace(/^(\d\d)(\d{4})(\d{0,4}).*/, "($1) $2-$3");
+            } else if (r.length > 2) {
+                r = r.replace(/^(\d\d)(\d{0,5})/, "($1) $2");
+            } else {
+                r = ''
+            }
+            t.value = r;
+        }
+    </script>
+    <script>
+        var tipo;
+        window.onload = () => {
+            alterTab(0);
+            parent.ebfFlowExecute('Novo Cadastro de Oficinas - retornar tipo de veiculos', null);
+        }
+        function uploadBtn(tipo) {
+            document.getElementById('upload-btn').style.display = tipo
+        }
+        //alterador de abas, alterna entre a aba principal de cadastro e a de tipos de veiculos
+        function alterTab(tab) {
+            let qnt = document.querySelectorAll('.tab-pane').length
+            for (let i = 0; i < qnt; i++) {
+                document.querySelectorAll('.tab-pane')[i].style.display = 'none'
+                if (document.querySelectorAll('.tab-select')[i].classList.contains('act')) {
+                    document.querySelectorAll('.tab-select')[i].classList.remove('act')
+                }
+            }
+            document.querySelectorAll('.tab-pane')[tab].style.display = ''
+            document.querySelectorAll('.tab-select')[tab].classList.add('act')
+        }
+        //função matrix para teste dos emails
+        function emailsTest() {
+            let em1 = document.getElementById('email').value;
+            let em2 = document.getElementById('email2').value;
+            let a = false, b = false;
+            if (em1 != '')
+                a = email_check('email');
+            if (em2 == '' || em2 == null)
+                b = true;
+            else
+                b = email_check('email2');
+            if (a && b)
+                return true
+            else
+                return false
+        }
+        //caso algum email esteja invalido essa função muda a coloração do input
+        function email_check(id) {
+            let e = document.getElementById(id)
+            if (validacaoEmail(e)) {
+                e.style.borderColor = 'lightgray'
+                return true
+            }
+            else {
+                e.style.borderColor = 'red'
+                e.value = ''
+                parent.ebfFlowExecute('Geral - Sweet Alert Notificar', parent.ebfListParamsCreate(0, 'Informe um email válido'));
+                return false
+            }
+        }
+        //esta função que realmente faz a validação do email, verificando se todos os dados para ser um email valido estão presentes
+        function validacaoEmail(field) {
+            usuario = field.value.substring(0, field.value.indexOf("@"));
+            dominio = field.value.substring(field.value.indexOf("@") + 1, field.value.length);
+            if ((usuario.length >= 1) &&
+                (dominio.length >= 3) &&
+                (usuario.search("@") == -1) &&
+                (dominio.search("@") == -1) &&
+                (usuario.search(" ") == -1) &&
+                (dominio.search(" ") == -1) &&
+                (dominio.search(".") != -1) &&
+                (dominio.indexOf(".") >= 1) &&
+                (dominio.lastIndexOf(".") < dominio.length - 1)) {
+                return true
+            }
+            else
+                return false
+        }
+        //Validador de CNPJ, verifica se o CNPJ é válido ou não
+        function validarCNPJ(cnpj) {
+            cnpj = cnpj.replace(/[^\d]+/g, '');
+            if (cnpj == '') return false;
+            if (cnpj.length != 14)
+                return false;
+            // Elimina CNPJs invalidos conhecidos
+            if (cnpj == "00000000000000" ||
+                cnpj == "11111111111111" ||
+                cnpj == "22222222222222" ||
+                cnpj == "33333333333333" ||
+                cnpj == "44444444444444" ||
+                cnpj == "55555555555555" ||
+                cnpj == "66666666666666" ||
+                cnpj == "77777777777777" ||
+                cnpj == "88888888888888" ||
+                cnpj == "99999999999999")
+                return false;
+            // Valida DVs
+            tamanho = cnpj.length - 2
+            numeros = cnpj.substring(0, tamanho);
+            digitos = cnpj.substring(tamanho);
+            soma = 0;
+            pos = tamanho - 7;
+            for (i = tamanho; i >= 1; i--) {
+                soma += numeros.charAt(tamanho - i) * pos--;
+                if (pos < 2)
+                    pos = 9;
+            }
+            resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+            if (resultado != digitos.charAt(0))
+                return false;
+            tamanho = tamanho + 1;
+            numeros = cnpj.substring(0, tamanho);
+            soma = 0;
+            pos = tamanho - 7;
+            for (i = tamanho; i >= 1; i--) {
+                soma += numeros.charAt(tamanho - i) * pos--;
+                if (pos < 2)
+                    pos = 9;
+            }
+            resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+            if (resultado != digitos.charAt(1))
+                return false;
+            return true;
+        }
+        //obter a lista dos tipo de veiculo marcados
+        function obterTipoVeiculo() {
+            let t = document.querySelectorAll('.tveiculo').length
+            let lista = new Array;
+            for (let i = 0; i < t; i++) {
+                if (document.querySelectorAll('.tveiculo')[i].checked)
+                    lista[i] = document.querySelectorAll('.tveiculo')[i].value;
+            }
+            return lista;
+        }
+        //alternador de checkbox quando seu respectivo label é clicado
+        function alterCheck(id) {
+            let o = document.getElementById(id);
+            if (o.checked)
+                o.checked = 0
+            else
+                o.checked = 1
+        }
+        //realiza a verificação do CNPJ e faz a chamada da api para receber os dados referentes ao CNPJ
+        function consultaCNPJ() {
+            let cnpj = document.getElementById('cnpj_modal').value
+            if (validarCNPJ(document.getElementById('cnpj_modal').value)) {
+                if (cnpj == null || cnpj == '') {
+                    parent.ebfFlowExecute('Geral - Sweet Alert Notificar', parent.ebfListParamsCreate(0, 'Informe o CNPJ antes de prosseguir'));
+                    document.getElementById('btn_next').setAttribute('disabled', 'disabled');
+                    limpaModal();
+                }
+                else {
+                    let r = parent.ebfFlowExecute('Chamar ReceitaWS - Integracao', parent.ebfListParamsCreate(cnpj));
+                    if (r) {
+                        document.getElementById('btn_next').removeAttribute('disabled');
+                        document.getElementById('cnpj_seg').value = `${cnpj}`;
+                    }
+                    else {
+                        document.getElementById('cnpj_seg').value = '';
+                        document.getElementById('btn_next').setAttribute('disabled', 'disabled');
+                        limpaModal();
+                        parent.ebfFlowExecute('Geral - Sweet Alert Notificar', parent.ebfListParamsCreate(0, 'Informe um CNPJ válido para prosseguir'));
+                    }
+                }
+            }
+            else {
+                document.getElementById('cnpj_seg').value = '';
+                document.getElementById('btn_next').setAttribute('disabled', 'disabled');
+                parent.ebfFlowExecute('Geral - Sweet Alert Notificar', parent.ebfListParamsCreate(0, 'Informe um CNPJ válido para prosseguir'));
+                limpaModal();
+            }
+            if (cnpj == null || cnpj == '') {
+                document.getElementById('cnpj_seg').value = '';
+                parent.ebfFlowExecute('Geral - Sweet Alert Notificar', parent.ebfListParamsCreate(0, 'Informe um CNPJ válido para prosseguir'));
+                document.getElementById('btn_next').setAttribute('disabled', 'disabled');
+                limpaModal();
+            }
+        }
+        let ids_m_info = [rz_social_m, nm_fant_m, cep_m, end_m, bair_m, cid_m, uf_m]
+        //Função que limpa as informações do modal
+        function limpaModal() {
+            for (let i = 0; i < ids_m_info.length; i++) {
+                document.getElementById(ids_m_info[i]).value = ''
+            }
+        }
+        //função que faz a consulta do cep e preenche os dados com o restorno da API
+        function pesquisacep() {
+            let valor = document.getElementById('cep').value
+            valor = valor.replace(/ /g, '')
+            valor = valor.replace(/-/g, '')
+            valor = valor.replace(/\./g, '')
+            valor = valor.replace(/\//g, '')
+            if (valor.length == 8)
+                fetch(`https://viacep.com.br/ws/${valor}/json`)
+                    .then(response => {
+                        return response.json()
+                            .then((data) => {
+                                document.getElementById('cidade').value = data.localidade
+                                document.getElementById('bairro').value = data.bairro
+                                document.getElementById('endereco').value = data.logradouro
+                                document.getElementById('uf').value = data.uf
+                            });
+                    }).then((data) => {
+                    }).catch((err) => { });
+        };
+        //alterna o atributo 'checked' dos checkbox
+        function toggleCheck(id) {
+            if (document.getElementById(id).checked)
+                document.getElementById(id).checked = 0
+            else
+                document.getElementById(id).checked = 1
+        }
+        //função que faz a seleção de um input do tipo radio quando seu label é clicado
+        function selectRadio(id) {
+            document.getElementById(id).checked = 1;
+        }
+        function obterTipoConta() {
+            if (document.getElementById('cCorrente').checked == 1)
+                return 1
+            else return 2
+        }
+        let nume;
+        let email_j;
+        let tel_j;
+        function obterDados() {
+            document.getElementById('razao_social').value = document.getElementById('rz_social_m').value;
+            document.getElementById('nome_fantasia').value = document.getElementById('nm_fant_m').value;
+            document.getElementById('cep').value = document.getElementById('cep_m').value;
+            document.getElementById('endereco').value = document.getElementById('end_m').value;
+            document.getElementById('bairro').value = document.getElementById('bair_m').value;
+            document.getElementById('cidade').value = document.getElementById('cid_m').value;
+            document.getElementById('uf').value = document.getElementById('uf_m').value;
+            document.getElementById('email').value = email_j;
+            document.getElementById('telefone_1').value = tel_j;
+            /*  */
+            document.getElementById('razao_social').setAttribute('disabled', 'disabled')
+            document.getElementById('nome_fantasia').setAttribute('disabled', 'disabled')
+            document.getElementById('cep').setAttribute('disabled', 'disabled')
+            document.getElementById('endereco').setAttribute('disabled', 'disabled')
+            document.getElementById('cidade').setAttribute('disabled', 'disabled')
+            document.getElementById('uf').setAttribute('disabled', 'disabled')
+            document.getElementById('bairro').setAttribute('disabled', 'disabled')
+            /*  */
+            if (nume != undefined && nume != null) {
+                document.getElementById('num').value = nume
+                document.getElementById('num').setAttribute('disabled', 'disabled')
+            }
+            /*  */
+            document.getElementById('modal_1').style.display = 'none';
+            /*  */
+        }
+        let ids_inp = ['telefone_1', 'qnt_max_veiculos', 'email', 'cep', 'uf', 'cidade', 'bairro', 'endereco', 'num'];
+        function oData() {
+            let tel_1_ = document.getElementById('telefone_1').value;
+            let tel_2_ = document.getElementById('telefone_2').value;
+            let email_1_ = document.getElementById('email').value;
+            let email_2_ = document.getElementById('email2').value;
+            let qte_max_vei_ = document.getElementById('qnt_max_veiculos').value;
+            let cep_ = document.getElementById('cep').value;
+            let uf_ = document.getElementById('uf').value;
+            let cidade_ = document.getElementById('cidade').value;
+            let bairro_ = document.getElementById('bairro').value;
+            let ende_ = document.getElementById('endereco').value;
+            let numero_ = document.getElementById('num').value;
+            cep_ = cep_.replace(/\s/g, '');
+            cep_ = cep_.replace(/-/g, '');
+            cep_ = cep_.replace(/\./g, '');
+            let lista = [tel_1_, qte_max_vei_, email_1_, cep_, uf_, cidade_, bairro_, ende_, numero_, tel_2_, email_2_];
+            for (let i = 0; i < ids_inp.length; i++) {
+                document.getElementById(ids_inp[i]).style.borderColor = 'lightgray'
+                if (document.getElementById(ids_inp[i]).value == null || document.getElementById(ids_inp[i]).value == undefined || document.getElementById(ids_inp[i]).value.replace(/\s/g, '') == '') {
+                    lista[0] = 'protocol0'
+                    document.getElementById(ids_inp[i]).style.borderColor = 'red'
+                }
+            }
+            if (!(emailsTest()))
+                lista[0] = 'protocol0'
+            let tipoVei = obterTipoVeiculo();
+            document.getElementById('pagina_tip').style.color = 'lightgray'
+            if (tipoVei.length < 1) {
+                if (lista[0] != 'protocol0') {
+                    alterTab(1);
+                    lista[0] = 'protocol0'
+                    parent.ebfFlowExecute('Geral - Sweet Alert Notificar', parent.ebfListParamsCreate(0, 'Informe os tipos de veiculos que sua oficina trabalha'));
+                }
+                else {
+                    document.getElementById('pagina_tip').style.color = 'red'
+                }
+            }
+            return lista;
+        }
+        function saveData() {
+            let p = parent.ebfFlowExecute('Novo cadastro de oficinas - Salvar dados oficina', null);
+        }
 
 
-                            //desabilita todos os campos
-                            function desabI() {
-                                document.getElementById('razao_social').setAttribute('disabled', 'disabled');
-                                document.getElementById('nome_fantasia').setAttribute('disabled', 'disabled');
-                                document.getElementById('cep').setAttribute('disabled', 'disabled');
-                                document.getElementById('endereco').setAttribute('disabled', 'disabled');
-                                document.getElementById('cidade').setAttribute('disabled', 'disabled');
-                                document.getElementById('uf').setAttribute('disabled', 'disabled');
-                                document.getElementById('bairro').setAttribute('disabled', 'disabled');
-                                document.getElementById('telefone_1').setAttribute('disabled', 'disabled');
-                                document.getElementById('telefone_2').setAttribute('disabled', 'disabled');
-                                document.getElementById('email').setAttribute('disabled', 'disabled');
-                                document.getElementById('email2').setAttribute('disabled', 'disabled');
-                                document.getElementById('qnt_max_veiculos').setAttribute('disabled', 'disabled');
-                                document.getElementById('vei_tip').setAttribute('disabled', 'disabled');
-                                document.getElementById('dt_cad').setAttribute('disabled', 'disabled');
-                                document.getElementById('num').setAttribute('disabled', 'disabled');
-                                document.getElementById('s_btn').setAttribute('disabled', 'disabled');
-                                document.getElementById('s_btn').style.display = 'none';
-                            }
-                        </script>
-                        <!-- Jquery Core Js -->
-                        <script
-                            src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/jquery/jquery.min.js"></script>
-                        <!-- Bootstrap Core Js -->
-                        <script
-                            src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/bootstrap/js/bootstrap.js"></script>
-                        <script
-                            src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/select2/dist/js/select2.min.js"></script>
-                        <script
-                            src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/node-waves/waves.js"></script>
-                        <!-- Input Mask Plugin Js -->
-                        <script
-                            src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/jquery-inputmask/jquery.inputmask.bundle.js"></script>
-                        <!-- Data Table Plugin Js -->
-                        <script type="text/javascript"
-                            src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/moment/moment.js"></script>
-                        <script type="text/javascript"
-                            src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/datatables.min.js"></script>
-                        <script type="text/javascript"
-                            src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/dt-moment.js"></script>
-                        <script type="text/javascript"
-                            src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/Buttons-1.6.1/js/dataTables.buttons.min.js"></script>
-                        <script type="text/javascript"
-                            src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/Buttons-1.6.1/js/buttons.flash.min.js"></script>
-                        <script type="text/javascript"
-                            src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/jszip.min.js"></script>
-                        <script type="text/javascript"
-                            src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/vfs_fonts.js"></script>
-                        <script type="text/javascript"
-                            src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/Buttons-1.6.1/js/buttons.html5.min.js"></script>
-                        <script type="text/javascript"
-                            src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/Buttons-1.6.1/js/buttons.print.min.js"></script>
-                        <!--  -->
-                        <script src="https://siga.arcoconsultoria.com/SIGA/libsiga/js/mainNoConflict.js"></script>
-                        <script
-                            src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/jquery-ui/jquery-ui.min.js"></script>
-                        <script
-                            src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/jquery-ui/datepicker-pt-BR.js"></script>
-                        <script
-                            src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/ckeditor/ckeditor.js"></script>
-                        <script
-                            src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/ckeditor/lang/pt-br.js"></script>
-                        <!-- Jquery CountTo Plugin Js -->
-                        <script
-                            src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/jquery-countto/jquery.countTo.js"></script>
+        //desabilita todos os campos
+        function desabI() {
+            document.getElementById('razao_social').setAttribute('disabled', 'disabled');
+            document.getElementById('nome_fantasia').setAttribute('disabled', 'disabled');
+            document.getElementById('cep').setAttribute('disabled', 'disabled');
+            document.getElementById('endereco').setAttribute('disabled', 'disabled');
+            document.getElementById('cidade').setAttribute('disabled', 'disabled');
+            document.getElementById('uf').setAttribute('disabled', 'disabled');
+            document.getElementById('bairro').setAttribute('disabled', 'disabled');
+            document.getElementById('telefone_1').setAttribute('disabled', 'disabled');
+            document.getElementById('telefone_2').setAttribute('disabled', 'disabled');
+            document.getElementById('email').setAttribute('disabled', 'disabled');
+            document.getElementById('email2').setAttribute('disabled', 'disabled');
+            document.getElementById('qnt_max_veiculos').setAttribute('disabled', 'disabled');
+            document.getElementById('vei_tip').setAttribute('disabled', 'disabled');
+            document.getElementById('dt_cad').setAttribute('disabled', 'disabled');
+            document.getElementById('num').setAttribute('disabled', 'disabled');
+            document.getElementById('s_btn').setAttribute('disabled', 'disabled');
+            document.getElementById('s_btn').style.display = 'none';
+        }
+    </script>
+    <!-- Jquery Core Js -->
+    <script src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap Core Js -->
+    <script src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/bootstrap/js/bootstrap.js"></script>
+    <script src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/select2/dist/js/select2.min.js"></script>
+    <script src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/node-waves/waves.js"></script>
+    <!-- Input Mask Plugin Js -->
+    <script
+        src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/jquery-inputmask/jquery.inputmask.bundle.js"></script>
+    <!-- Data Table Plugin Js -->
+    <script type="text/javascript"
+        src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/moment/moment.js"></script>
+    <script type="text/javascript"
+        src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/datatables.min.js"></script>
+    <script type="text/javascript"
+        src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/dt-moment.js"></script>
+    <script type="text/javascript"
+        src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/Buttons-1.6.1/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript"
+        src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/Buttons-1.6.1/js/buttons.flash.min.js"></script>
+    <script type="text/javascript"
+        src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/jszip.min.js"></script>
+    <script type="text/javascript"
+        src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/vfs_fonts.js"></script>
+    <script type="text/javascript"
+        src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/Buttons-1.6.1/js/buttons.html5.min.js"></script>
+    <script type="text/javascript"
+        src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/Buttons-1.6.1/js/buttons.print.min.js"></script>
+    <!--  -->
+    <script src="https://siga.arcoconsultoria.com/SIGA/libsiga/js/mainNoConflict.js"></script>
+    <script src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/jquery-ui/datepicker-pt-BR.js"></script>
+    <script src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/ckeditor/ckeditor.js"></script>
+    <script src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/ckeditor/lang/pt-br.js"></script>
+    <!-- Jquery CountTo Plugin Js -->
+    <script src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/jquery-countto/jquery.countTo.js"></script>
 </body>
 
 </html>
