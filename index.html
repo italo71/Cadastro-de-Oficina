@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arco Consultoria</title>
-
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/bootstrap/css/bootstrap5Min.css">
@@ -21,7 +20,6 @@
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-
     <style>
         .select2-selection__rendered {
             user-select: text;
@@ -358,7 +356,6 @@
                                                 disabled="disabled" onclick="obterDados()">Proximo</button>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -389,7 +386,9 @@
                                 }
                                 return ret;
                             };
-
+                            //inicia cronometro para redirecionamento para a tela de login do SIGA, caso a oficina ja tenha sido cadastrada
+                            //a mensagem exibida ao usuário é alterada para informa-lo que o cadastro ja foi realizado e posteriormente
+                            //ele é redirecionado para a pagina de login do SIGA
                             function startTimer(t) {
                                 if (!(t == null)) {
                                     document.querySelector('#modal_not .row .justify-content-center .card p').textContent = 'CNPJ ja cadastrado'
@@ -407,7 +406,7 @@
                                     }
                                 }, 1000);
                             }
-
+                            //usado para retornar o numero de acordo com o dado salvo no banco
                             function testeAtivado(num) {
                                 if (num) {
                                     return 1;
@@ -416,15 +415,7 @@
                                     return 0;
                                 }
                             }
-
-                            function fechaModa() {
-                                document.getElementById('modal_2').style.display = 'none';
-                            }
-
-                            function moreInfo() {
-                                document.getElementById('modal_2').style.display = 'block';
-                            }
-
+                            //obtem dados da consulta com CEP
                             function meu_callback(conteudo) {
                                 if (!("erro" in conteudo)) {
                                     document.getElementById('endereco').value = (conteudo.logradouro);
@@ -437,22 +428,21 @@
                                     alert("CEP não encontrado.");
                                 }
                             }
+                            //Limpa os dados do modal
                             function limpa_formulário_cep() {
                                 document.getElementById('endereco').value = ("");
                                 document.getElementById('bairro').value = ("");
                                 document.getElementById('cidade').value = ("");
                                 document.getElementById('estado').value = ("");
                             }
-
+                            //mascara de celular
                             function celMask(id) {
                                 let tel = document.getElementById(id)
                                 tel.value = mphone(tel.value);
                             }
-
                             function mphone(v) {
                                 let r = v.replace(/\D/g, "");
                                 r = r.replace(/^0/, "");
-
                                 if (r.length > 10) {
                                     r = r.replace(/^(\d\d)(\d{5})(\d{4}).*/, "($1) $2-$3");
                                 } else if (r.length > 5) {
@@ -464,13 +454,12 @@
                                 }
                                 return r;
                             }
-
+                            //validados de celular
                             function validaCel(id) {
                                 let t = document.getElementById(id);
                                 let v = t.value;
                                 let r = v.replace(/\D/g, "");
                                 r = r.replace(/^0/, "");
-
                                 if (r.length > 10) {
                                     r = r.replace(/^(\d\d)(\d{5})(\d{4}).*/, "($1) $2-$3");
                                 } else if (r.length > 5) {
@@ -485,16 +474,14 @@
                         </script>
                         <script>
                             var tipo;
-
                             window.onload = () => {
                                 alterTab(0);
                                 parent.ebfFlowExecute('Novo Cadastro de Oficinas - retornar tipo de veiculos', null);
                             }
-
                             function uploadBtn(tipo) {
                                 document.getElementById('upload-btn').style.display = tipo
                             }
-
+                            //alterador de abas, alterna entre a aba principal de cadastro e a de tipos de veiculos
                             function alterTab(tab) {
                                 let qnt = document.querySelectorAll('.tab-pane').length
                                 for (let i = 0; i < qnt; i++) {
@@ -506,7 +493,7 @@
                                 document.querySelectorAll('.tab-pane')[tab].style.display = ''
                                 document.querySelectorAll('.tab-select')[tab].classList.add('act')
                             }
-
+                            //função matrix para teste dos emails
                             function emailsTest() {
                                 let em1 = document.getElementById('email').value;
                                 let em2 = document.getElementById('email2').value;
@@ -522,7 +509,7 @@
                                 else
                                     return false
                             }
-
+                            //caso algum email esteja invalido essa função muda a coloração do input
                             function email_check(id) {
                                 let e = document.getElementById(id)
                                 if (validacaoEmail(e)) {
@@ -536,11 +523,10 @@
                                     return false
                                 }
                             }
-
+                            //esta função que realmente faz a validação do email, verificando se todos os dados para ser um email valido estão presentes
                             function validacaoEmail(field) {
                                 usuario = field.value.substring(0, field.value.indexOf("@"));
                                 dominio = field.value.substring(field.value.indexOf("@") + 1, field.value.length);
-
                                 if ((usuario.length >= 1) &&
                                     (dominio.length >= 3) &&
                                     (usuario.search("@") == -1) &&
@@ -555,16 +541,12 @@
                                 else
                                     return false
                             }
-
+                            //Validador de CNPJ, verifica se o CNPJ é válido ou não
                             function validarCNPJ(cnpj) {
-
                                 cnpj = cnpj.replace(/[^\d]+/g, '');
-
                                 if (cnpj == '') return false;
-
                                 if (cnpj.length != 14)
                                     return false;
-
                                 // Elimina CNPJs invalidos conhecidos
                                 if (cnpj == "00000000000000" ||
                                     cnpj == "11111111111111" ||
@@ -577,7 +559,6 @@
                                     cnpj == "88888888888888" ||
                                     cnpj == "99999999999999")
                                     return false;
-
                                 // Valida DVs
                                 tamanho = cnpj.length - 2
                                 numeros = cnpj.substring(0, tamanho);
@@ -606,6 +587,7 @@
                                     return false;
                                 return true;
                             }
+                            //obter a lista dos tipo de veiculo marcados
                             function obterTipoVeiculo() {
                                 let t = document.querySelectorAll('.tveiculo').length
                                 let lista = new Array;
@@ -615,6 +597,7 @@
                                 }
                                 return lista;
                             }
+                            //alternador de checkbox quando seu respectivo label é clicado
                             function alterCheck(id) {
                                 let o = document.getElementById(id);
                                 if (o.checked)
@@ -622,6 +605,7 @@
                                 else
                                     o.checked = 1
                             }
+                            //realiza a verificação do CNPJ e faz a chamada da api para receber os dados referentes ao CNPJ
                             function consultaCNPJ() {
                                 let cnpj = document.getElementById('cnpj_modal').value
                                 if (validarCNPJ(document.getElementById('cnpj_modal').value)) {
@@ -658,12 +642,13 @@
                                 }
                             }
                             let ids_m_info = [rz_social_m, nm_fant_m, cep_m, end_m, bair_m, cid_m, uf_m]
+                            //Função que limpa as informações do modal
                             function limpaModal() {
                                 for (let i = 0; i < ids_m_info.length; i++) {
                                     document.getElementById(ids_m_info[i]).value = ''
                                 }
                             }
-
+                            //função que faz a consulta do cep e preenche os dados com o restorno da API
                             function pesquisacep() {
                                 let valor = document.getElementById('cep').value
                                 valor = valor.replace(/ /g, '')
@@ -683,28 +668,25 @@
                                         }).then((data) => {
                                         }).catch((err) => { });
                             };
-
+                            //alterna o atributo 'checked' dos checkbox
                             function toggleCheck(id) {
                                 if (document.getElementById(id).checked)
                                     document.getElementById(id).checked = 0
                                 else
                                     document.getElementById(id).checked = 1
                             }
-
+                            //função que faz a seleção de um input do tipo radio quando seu label é clicado
                             function selectRadio(id) {
                                 document.getElementById(id).checked = 1;
                             }
-
                             function obterTipoConta() {
                                 if (document.getElementById('cCorrente').checked == 1)
                                     return 1
                                 else return 2
                             }
-
                             let nume;
                             let email_j;
                             let tel_j;
-
                             function obterDados() {
                                 document.getElementById('razao_social').value = document.getElementById('rz_social_m').value;
                                 document.getElementById('nome_fantasia').value = document.getElementById('nm_fant_m').value;
@@ -770,22 +752,15 @@
                                         document.getElementById('pagina_tip').style.color = 'red'
                                     }
                                 }
-
                                 return lista;
                             }
-
                             function sleep(ms) {
                                 return new Promise(resolve => setTimeout(resolve, ms));
                             }
-
                             function saveData() {
                                 let p = parent.ebfFlowExecute('Novo cadastro de oficinas - Salvar dados oficina', null);
-                                sleep(5000)
-                                if (p) {
-                                    window.location.href = "https://siga.arcoconsultoria.com/SIGA/open.do?sys=SIG";
-                                }
                             }
-
+                            //desabilita todos os campos
                             function desabI() {
                                 document.getElementById('razao_social').setAttribute('disabled', 'disabled');
                                 document.getElementById('nome_fantasia').setAttribute('disabled', 'disabled');
@@ -806,7 +781,6 @@
                                 document.getElementById('s_btn').style.display = 'none';
                             }
                         </script>
-
                         <!-- Jquery Core Js -->
                         <script
                             src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/jquery/jquery.min.js"></script>
@@ -817,11 +791,9 @@
                             src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/select2/dist/js/select2.min.js"></script>
                         <script
                             src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/node-waves/waves.js"></script>
-
                         <!-- Input Mask Plugin Js -->
                         <script
                             src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/jquery-inputmask/jquery.inputmask.bundle.js"></script>
-
                         <!-- Data Table Plugin Js -->
                         <script type="text/javascript"
                             src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/moment/moment.js"></script>
