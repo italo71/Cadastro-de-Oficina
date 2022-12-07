@@ -145,9 +145,15 @@
             background-color: lightgray !important;
         }
     </style>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store">
+    <meta http-equiv="Pragma" content="no-cache, no-store">
 </head>
 
 <body>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store">
+    <meta http-equiv="Pragma" content="no-cache, no-store">
     <div class="container-fluid" id="t">
         <div class="justify-content-center">
             <div class="row col-7">
@@ -377,7 +383,11 @@
                             <div class="row">
                                 <div class="justify-content-center" style="margin: 15% auto;">
                                     <div class="card col-4">
-                                        <p style="font-size: 25px;" id="sweetA"></p>
+                                        <div class="col-12">
+                                            <div class="justify-content-center">
+                                                <p style="font-size: 25px;" id="sweetA"></p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -404,7 +414,7 @@
         function sweetAlert(texto) {
             document.getElementById('modal_sweet').style.display = 'block';
             document.getElementById('sweetA').innerText = texto;
-            sweetAlertFechar(5);
+            sweetAlertFechar(2);
         }
         function sweetAlertFechar(t) {
             var timer = t, minutes, seconds;
@@ -732,11 +742,6 @@
             /*  */
             document.getElementById('razao_social').setAttribute('disabled', 'disabled')
             document.getElementById('nome_fantasia').setAttribute('disabled', 'disabled')
-            document.getElementById('cep').setAttribute('disabled', 'disabled')
-            document.getElementById('endereco').setAttribute('disabled', 'disabled')
-            document.getElementById('cidade').setAttribute('disabled', 'disabled')
-            document.getElementById('uf').setAttribute('disabled', 'disabled')
-            document.getElementById('bairro').setAttribute('disabled', 'disabled')
             /*  */
             if (nume != undefined && nume != null) {
                 document.getElementById('num').value = nume
@@ -787,7 +792,10 @@
             return lista;
         }
         function saveData() {
-            let p = parent.ebfFlowExecute('Novo cadastro de oficinas - Salvar dados oficina', null);
+            let t = oData()
+            let p
+            if (t[0] != 'protocol0')
+                p = parent.ebfFlowExecute('Novo cadastro de oficinas - Salvar dados oficina', null);
         }
         //desabilita todos os campos
         function desabI() {
