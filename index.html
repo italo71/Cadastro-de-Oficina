@@ -152,8 +152,6 @@
 </head>
 
 <body>
-    <meta http-equiv="Cache-Control" content="no-cache, no-store">
-    <meta http-equiv="Pragma" content="no-cache, no-store">
     <div class="container-fluid" id="t">
         <div class="justify-content-center">
             <div class="row col-7">
@@ -207,7 +205,7 @@
                             </div>
                             <div class="div-input form-floating mb-3 m-l-10 col-3" style="display: inline-block;">
                                 <input class="form-control" type="text" autocomplete="off" name="Telefone2"
-                                    id="telefone_2" placeholder="." onchange="celMask('telefone_2')">
+                                    id="telefone_2" placeholder="." onchange="validaCel('telefone_2')" oninput="celMask('telefone_2')">
                                 <label for="" id="" style="width: 400px;">Telefone 2</label>
                             </div>
                             <div class="div-input form-floating mb-3 m-l-10 col-5" style="display: inline-block;">
@@ -223,7 +221,7 @@
                             <!-- info adicionais -->
                             <div class="div-input form-floating mb-3 m-l-10 col-3" style="display: inline-block;">
                                 <input class="form-control" type="number" autocomplete="off" name="qntMaximaVeiculos"
-                                    id="qnt_max_veiculos" placeholder=".">
+                                    id="qnt_max_veiculos" placeholder="." onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                                 <label for="" id="" style="width: 600px;">Qte Máxima de Veículos <span
                                         class="obg">*</span></label>
                             </div>
@@ -745,7 +743,6 @@
             /*  */
             if (nume != undefined && nume != null) {
                 document.getElementById('num').value = nume
-                document.getElementById('num').setAttribute('disabled', 'disabled')
             }
             /*  */
             document.getElementById('modal_1').style.display = 'none';
