@@ -780,7 +780,7 @@
                 if (lista[0] != 'protocol0') {
                     alterTab(1);
                     lista[0] = 'protocol0'
-                    parent.ebfFlowExecute('Geral - Sweet Alert Notificar', parent.ebfListParamsCreate(0, 'Informe os tipos de veiculos que sua oficina trabalha'));
+                    sweetAlert('Informe os tipos de veiculos que sua oficina trabalha');
                 }
                 else {
                     document.getElementById('pagina_tip').style.color = 'red'
