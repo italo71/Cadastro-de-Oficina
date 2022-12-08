@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,7 +21,6 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet" href="./style.css">
 </head>
-
 <body>
     <div class="container-fluid" id="t">
         <div class="justify-content-center">
@@ -179,7 +177,7 @@
                         <input type="text" name="" id="cnpj_seg" style="display: none;">
                         <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
                         <!-- Inicio Modal-->
-                        <div class="modal" id="modal_1" style="z-index: 9999; background-color: rgba(0, 0, 0, 0.5);">
+                        <div class="modal" id="modal_1" style="z-index: 9999; background-color: rgba(0, 0, 0, 0.5); display: block;">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -417,7 +415,6 @@
         window.onload = () => {
             alterTab(0);
             parent.ebfFlowExecute('Novo Cadastro de Oficinas - retornar tipo de veiculos', null);
-            window.location.reload(true)
         }
         function uploadBtn(tipo) {
             document.getElementById('upload-btn').style.display = tipo
@@ -764,5 +761,4 @@
     <!-- Jquery CountTo Plugin Js -->
     <script src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/jquery-countto/jquery.countTo.js"></script>
 </body>
-
 </html>
