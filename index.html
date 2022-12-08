@@ -560,7 +560,7 @@
             else {
                 e.style.borderColor = 'red'
                 e.value = ''
-                parent.ebfFlowExecute('Geral - Sweet Alert Notificar', parent.ebfListParamsCreate(0, 'Informe um email válido'));
+                sweetAlert('Informe um email válido');
                 return false
             }
         }
@@ -651,7 +651,7 @@
             let cnpj = document.getElementById('cnpj_modal').value
             if (validarCNPJ(document.getElementById('cnpj_modal').value)) {
                 if (cnpj == null || cnpj == '') {
-                    parent.ebfFlowExecute('Geral - Sweet Alert Notificar', parent.ebfListParamsCreate(0, 'Informe o CNPJ antes de prosseguir'));
+                    sweetAlert('Informe o CNPJ antes de prosseguir');
                     document.getElementById('btn_next').setAttribute('disabled', 'disabled');
                     limpaModal();
                 }
@@ -665,19 +665,19 @@
                         document.getElementById('cnpj_seg').value = '';
                         document.getElementById('btn_next').setAttribute('disabled', 'disabled');
                         limpaModal();
-                        parent.ebfFlowExecute('Geral - Sweet Alert Notificar', parent.ebfListParamsCreate(0, 'Informe um CNPJ válido para prosseguir'));
+                        sweetAlert('Informe um CNPJ válido para prosseguir');
                     }
                 }
             }
             else {
                 document.getElementById('cnpj_seg').value = '';
                 document.getElementById('btn_next').setAttribute('disabled', 'disabled');
-                parent.ebfFlowExecute('Geral - Sweet Alert Notificar', parent.ebfListParamsCreate(0, 'Informe um CNPJ válido para prosseguir'));
+                sweetAlert('Informe um CNPJ válido para prosseguir');
                 limpaModal();
             }
             if (cnpj == null || cnpj == '') {
                 document.getElementById('cnpj_seg').value = '';
-                parent.ebfFlowExecute('Geral - Sweet Alert Notificar', parent.ebfListParamsCreate(0, 'Informe um CNPJ válido para prosseguir'));
+                sweetAlert('Informe um CNPJ válido para prosseguir');
                 document.getElementById('btn_next').setAttribute('disabled', 'disabled');
                 limpaModal();
             }
