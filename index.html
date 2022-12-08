@@ -509,6 +509,7 @@
         window.onload = () => {
             alterTab(0);
             parent.ebfFlowExecute('Novo Cadastro de Oficinas - retornar tipo de veiculos', null);
+            window.location.reload(true)
         }
         function uploadBtn(tipo) {
             document.getElementById('upload-btn').style.display = tipo
