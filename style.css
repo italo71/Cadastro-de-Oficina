@@ -121,3 +121,54 @@ input {
 body {
     background-color: lightgray !important;
 }
+
+#logo_img {
+    width: 175px;
+    height: 75px;
+    position: absolute;
+    z-index: 1;
+    right: 10px;
+    top: 2%;
+}
+
+#logo_img_2 {
+    width: 235px;
+    height: 40px;
+    position: absolute;
+    z-index: 1;
+    right: 10px;
+    top: 2%;
+    display: none;
+}
+
+#d_s_btn {
+    position: absolute;
+    right: 30px;
+    bottom: 10px;
+}
+
+@media screen and (max-width: 1600px) {
+    #logo_img {
+        display: none;
+    }
+
+    #logo_img_2 {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    #logo_img {
+        position: absolute;
+        z-index: 1;
+        right: 10px;
+        top: 25%;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    #d_s_btn {
+        right: 40px;
+    }
+
+}
