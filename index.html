@@ -22,6 +22,7 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
     <div class="container-fluid" id="t">
         <div class="justify-content-center">
@@ -31,7 +32,9 @@
                     <!-- Inicio parte de preenchimento de informações -->
                     <div class="card">
                         <img src="https://siga.arcoconsultoria.com/SIGA/libsiga/images/icons/sigamycar.jpg" alt=""
-                            style="width: 175px; height: 75px; position: absolute; z-index: 1; right: 10px; top: 2%;">
+                            id="logo_img">
+                            <img src="https://siga.arcoconsultoria.com/SIGA/libsiga/images/icons/sigamycarwid.jpg" alt=""
+                            id="logo_img_2">
                         <div class="col-5" style="display: inline; margin-top: 3px;">
                             <ul id="nav-ul">
                                 <li role="presentation" class="tab-select act" id="pagina_cad">
@@ -146,7 +149,7 @@
                                     placeholder=".">
                                 <label for="" id="" style="width: 400px;">Bairro <span class="obg">*</span></label>
                             </div>
-                            <div class="div-input form-floating mb-3 m-l-10 col-7" style="display: inline-block;">
+                            <div class="div-input form-floating mb-3 m-l-10 col-7" style="display: inline-block;" id="div_endereco">
                                 <input class="form-control" type="text" autocomplete="off" name="Endereço" id="endereco"
                                     placeholder=".">
                                 <label for="" id="" style="width: 400px;">Endereço <span class="obg">*</span></label>
@@ -155,9 +158,6 @@
                                 <input class="form-control" type="text" autocomplete="off" name="num" id="num"
                                     placeholder=".">
                                 <label for="" id="" style="width: 400px;">Numero <span class="obg">*</span></label>
-                            </div>
-                            <div class="col-1" style="position: absolute; right: 30px; bottom: 10px;">
-                                <button class="btn btn-success" id="s_btn" onclick="saveData()">Cadastrar</button>
                             </div>
                         </div>
                         <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
@@ -171,16 +171,15 @@
                                         onclick="alterCheck('c@@count@@')">@@tipo@@</span><br>
                                 </div>
                             </div>
-                            <div class="col-1" style="position: absolute; right: 30px; bottom: 10px;">
-                                <button class="btn btn-success" id="s_btn" onclick="saveData()">Cadastrar</button>
-                            </div>
+                        </div>
+                        <div class="col-1" id="d_s_btn">
+                            <button class="btn btn-success" id="s_btn" onclick="saveData()">Cadastrar</button>
                         </div>
                         <!-- Fim cadastro -->
                         <input type="text" name="" id="cnpj_seg" style="display: none;">
                         <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
                         <!-- Inicio Modal-->
-                        <div class="modal" id="modal_1"
-                            style="z-index: 9999; background-color: rgba(0, 0, 0, 0.5); display: block;">
+                        <div class="modal" id="modal_1" style="z-index: 9999; background-color: rgba(0, 0, 0, 0.5);">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
